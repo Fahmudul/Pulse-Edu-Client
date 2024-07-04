@@ -19,7 +19,7 @@ const contactInfo = [
   {
     logo: <FaMapMarked />,
     title: "Address",
-    description: "77/E Uttarkhan, Dhaka-1230",
+    description: "77/e Uttarkhan, Dhaka-1230",
   },
 ];
 
