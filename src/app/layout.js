@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import LayoutTransition from "@/components/LayoutTransition";
 import StairTransition from "@/components/StairTransition";
 import Footer from "@/components/Footer";
-
+import { Toaster } from "react-hot-toast";
 const jetbrainMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
@@ -19,9 +19,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      
-
       <body className={jetbrainMono.variable}>
+        <Toaster position="top-center" />
         <Header />
         <StairTransition />
         <LayoutTransition>{children}</LayoutTransition>
