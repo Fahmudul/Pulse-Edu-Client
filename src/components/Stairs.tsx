@@ -12,7 +12,7 @@ const Animation = {
   },
 };
 
-const reverseIndex = (index) => {
+const reverseIndex = (index: number) => {
   const totalStairs = 6;
   return totalStairs - index - 1;
 };
