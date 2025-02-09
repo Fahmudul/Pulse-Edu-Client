@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaGithub, FaLinkedinIn, FaTwitter, FaFacebook } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn,  FaFacebook } from "react-icons/fa";
 
 const socialLink = [
   { icon: <FaGithub />, link: "https://github.com/Fahmudul" },
@@ -12,7 +12,13 @@ const socialLink = [
     link: "https://www.facebook.com/profile.php?id=100032109636929",
   },
 ];
-const FooterSocials = ({ containerClass, iconClass }) => {
+const FooterSocials = ({
+  containerClass,
+  iconClass,
+}: {
+  containerClass: string;
+  iconClass: string;
+}) => {
   return (
     <div className={containerClass}>
       {socialLink.map((item, idx) => (

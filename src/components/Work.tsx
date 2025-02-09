@@ -1,31 +1,18 @@
 "use client";
 
-import {
-  FaCss3,
-  FaHtml5,
-  FaJs,
-  FaNodeJs,
-  FaReact,
-  FaPython,
-  FaFigma,
-} from "react-icons/fa";
-import { TbBrandCpp } from "react-icons/tb";
+import { FaHtml5, FaJs, FaReact } from "react-icons/fa";
+
 import {
   SiMongodb,
-  SiFirebase,
   SiExpress,
-  SiNextdotjs,
   SiTailwindcss,
-  SiShadcnui,
-  SiMambaui,
-  SiDaisyui,
   SiNodedotjs,
 } from "react-icons/si";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { BsArrowRight, BsGithub } from "react-icons/bs";
+import { BsGithub } from "react-icons/bs";
 import { GoArrowUpRight } from "react-icons/go";
 import {
   TooltipProvider,
@@ -132,7 +119,7 @@ const projects = [
 ];
 const Work = () => {
   const [currentProject, setCurrentProject] = useState(projects[0]);
-  const handleSlideChange = (swiper: { activeIndex: numb; }) => {
+  const handleSlideChange = (swiper: { activeIndex: number }) => {
     const currentIdx = swiper.activeIndex;
     setCurrentProject(projects[currentIdx]);
   };
