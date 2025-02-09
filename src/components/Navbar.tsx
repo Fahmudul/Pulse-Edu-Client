@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { Link } from "react-scroll";
 
 const NavItems = [
   {
@@ -28,12 +28,14 @@ const Navbar = () => {
     <nav className="flex gap-9">
       {NavItems.map((item, idx) => (
         <Link
-          href={item.path}
+          to={item.name}
           key={idx}
+          smooth={true}
           className={`${
             pathname === item.path &&
             "text-accent border-b-2 border-accent px-2 "
-          } font-medium hover:text-accent transition-all duration-300`}
+          } font-medium hover:text-accent transition-all duration-300 cursor-pointer`}
+          duration={500}
         >
           {item.name}
         </Link>

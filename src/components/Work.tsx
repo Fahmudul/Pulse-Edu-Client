@@ -131,6 +131,7 @@ const Work = () => {
         transition: { duration: 0.4, ease: "easeIn", delay: 2.4 },
       }}
       className="mn-h-screen flex flex-col justify-center py-12 xl:px-0"
+      id="Work"
     >
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row xl:gap-[30px]">

@@ -59,6 +59,7 @@ const Contact = () => {
         transition: { duration: 0.4, ease: "easeIn", delay: 2.4 },
       }}
       className="py-8"
+      id="Contact"
     >
       <div className="container mx-auto">
         <div className="flex flex-col  xl:flex-row-reverse gap-[30px]">
