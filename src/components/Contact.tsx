@@ -2,13 +2,9 @@
 import React from "react";
 // import emailjs from "@emailjs/browser";
 import { FaEnvelope, FaMapMarked, FaPhone } from "react-icons/fa";
-import { motion } from "framer-motion";
-import 'animate.css';
-
 import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-
 const contactInfo = [
   {
     logo: <FaPhone />,
@@ -26,7 +22,6 @@ const contactInfo = [
     description: "77/e Uttarkhan, Dhaka-1230",
   },
 ];
-
 const Contact = () => {
   // const sendEmail = (e) => {
   //   e.preventDefault();

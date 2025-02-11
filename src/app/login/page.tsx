@@ -1,5 +1,5 @@
 "use client";
-import React, from "react";
+import React from "react";
 import { Github } from "lucide-react";
 import { SlSocialGoogle } from "react-icons/sl";
 import { signIn } from "next-auth/react";
@@ -10,22 +10,20 @@ export type TInputFields = {
   password?: string;
 };
 const LoginPage = () => {
-
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TInputFields>();
-  const onSubmit: SubmitHandler<TInputFields> = async(data) => {
+  const onSubmit: SubmitHandler<TInputFields> = async (data) => {
     // console.log(data);
     const toastId = toast.loading("Logging in...");
-    signIn("credentials", { ...data, }).then((res) => {
+    signIn("credentials", { ...data }).then((res) => {
       if (res?.error) {
         toast.error(res.error, { id: toastId });
       } else {
         toast.success("Login successful", { id: toastId, duration: 2000 });
-        fetch("/api/auth/refresh").then((res)=>res.json());
+        fetch("/api/auth/refresh").then((res) => res.json());
       }
     });
   };

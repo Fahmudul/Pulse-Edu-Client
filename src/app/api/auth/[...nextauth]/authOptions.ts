@@ -2,7 +2,6 @@ import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { TInputFields } from "@/app/login/page";
 import handleLogin from "@/Utils/handleLogin";
 import { handleRegister } from "@/Utils/handleRegister";
 const authOptions: NextAuthOptions = {
@@ -25,7 +24,8 @@ const authOptions: NextAuthOptions = {
           } else {
             return null;
           }
-        } catch (error) {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (error: unknown) {
           throw new Error("Failed to login");
         }
       },
@@ -43,7 +43,7 @@ const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ user }) {
       // console.log("from line 46", user);
       // console.log("from line 47", account);
       // console.log("from line 48", profile);
@@ -87,8 +87,8 @@ const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  session:{
-    strategy:"jwt"
+  session: {
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET as string,
 };
