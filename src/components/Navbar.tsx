@@ -25,7 +25,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-9">
+    <nav className="flex gap-9  ">
       {NavItems.map((item, idx) => (
         <Link
           to={item.name}
@@ -36,6 +36,7 @@ const Navbar = () => {
             "text-accent border-b-2 border-accent px-2 "
           } font-medium hover:text-accent transition-all duration-300 cursor-pointer`}
           duration={500}
+          offset={-100}
         >
           {item.name}
         </Link>

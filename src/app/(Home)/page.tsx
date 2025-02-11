@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import Socials from "@/components/Socials";
@@ -7,11 +8,21 @@ import Link from "next/link";
 import Work from "@/components/Work";
 import Resume from "@/components/Resume";
 import Contact from "@/components/Contact";
-
+import { useRef } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+// import 'animate.css';
 export default function Home() {
+  const ref = useRef<HTMLElement>(null);
+  // const isVisible = useInView(ref);
   return (
-    <main className="">
-      <div className="container mx-auto ">
+    <main
+      className={"animate__slideInLeft animate__animated"}
+      id="home"
+      ref={ref}
+    >
+      <Header />
+      <div className={`container mx-auto `}>
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-7 xl:pb-26">
           <div className="text-center xl:text-left order-2 xl:order-none">
             <span className="text-xl">MERN Stack Developer</span>
@@ -21,7 +32,7 @@ export default function Home() {
                 <span className="text-accent">Fahmudul Hassan</span>
               </span>
             </h1>
-            <p className="max-w-[500px] mb-9 text-white/80 leading-7 mt-4">
+            <p className="max-w-[500px] mb-9 text-white/80 leading-7 mt-4 ">
               Skilled Full-Stack Developer: Proficient in MERN Stack, Adept in
               C/C++ & Python for Adaptable Solutions
             </p>
@@ -60,6 +71,7 @@ export default function Home() {
       <Resume />
       <Work />
       <Contact />
+      <Footer />
     </main>
   );
 }

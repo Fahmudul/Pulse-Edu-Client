@@ -130,10 +130,11 @@ const Work = () => {
         opacity: 1,
         transition: { duration: 0.4, ease: "easeIn", delay: 2.4 },
       }}
-      className="mn-h-screen flex flex-col justify-center py-12 xl:px-0"
+      className="mn-h-screen flex flex-col justify-center xl:px-0"
       id="Work"
     >
       <div className="container mx-auto">
+        <h1 className="xl:text-6xl font-bold my-5">Projects</h1>
         <div className="flex flex-col xl:flex-row xl:gap-[30px]">
           <div className="w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">
             <div className="flex flex-col gap-[30px] h-[55%]">

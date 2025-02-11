@@ -22,3 +22,6 @@
     -webkit-text-stroke: 4px white;
   }
 }
+.shadow-custom {
+  box-shadow: #fee5bf23 0px 5px 15px;
+}

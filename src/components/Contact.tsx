@@ -3,7 +3,7 @@ import React from "react";
 // import emailjs from "@emailjs/browser";
 import { FaEnvelope, FaMapMarked, FaPhone } from "react-icons/fa";
 import { motion } from "framer-motion";
-
+import 'animate.css';
 
 import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
@@ -52,19 +52,16 @@ const Contact = () => {
   //     });
   // };
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { duration: 0.4, ease: "easeIn", delay: 2.4 },
-      }}
+    <div
+
+      
       className="py-8"
       id="Contact"
     >
       <div className="container mx-auto">
         <div className="flex flex-col  xl:flex-row-reverse gap-[30px]">
           {/*Contact form*/}
-          <div className="xl:h-[56%] order-2 xl:order-none">
+          <div className="xl:h-[56%] order-2 xl:order-none ">
             <form
               className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-2xl"
               // onSubmit={sendEmail}
@@ -102,7 +99,7 @@ const Contact = () => {
           </div>
 
           {/*Contact info*/}
-          <div className="flex-1 bg-[#27272c] rounded-2xl px-4 flex flex-col items-center xl:justify-center order-1 xl:order-none mb-8 xl:mb-0">
+          <div className="animate__slideInLeft flex-1 bg-[#27272c] rounded-2xl px-4 flex flex-col items-center xl:justify-center order-1 xl:order-none mb-8 xl:mb-0">
             <h1 className="text-3xl mb-7 text-white/70 font-semibold">
               Contact Info
             </h1>
@@ -122,7 +119,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </motion.section>
+    </div>
   );
 };
 

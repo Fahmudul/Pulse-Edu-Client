@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   FaCss3,
   FaHtml5,
@@ -18,7 +18,6 @@ import {
   SiTailwindcss,
   SiShadcnui,
   SiMambaui,
-  
 } from "react-icons/si";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -30,6 +29,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 import Link from "next/link";
+
 const about = {
   title: "About Me",
   description:
@@ -167,6 +167,22 @@ const skills = {
   ],
 };
 const Resume = () => {
+  const [title, setTitle] = useState("About Me");
+
+  const changTitle = (data: string) => {
+    // console.log(data);
+    switch (data) {
+      case "about":
+        setTitle("About me");
+        break;
+      case "education":
+        setTitle("Education");
+        break;
+      case "skills":
+        setTitle("Skills");
+        break;
+    }
+  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -174,24 +190,33 @@ const Resume = () => {
         opacity: 1,
         transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
       }}
-      className=" flex items-center py-12 xl:py-0"
+      className=" flex items-center  h-auto py-12 bg-[#17262b] mb-16"
       id="Resume"
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto ">
+        <h1 className="xl:text-6xl font-bold my-5">{title}</h1>
         <Tabs
           defaultValue="about"
-          className="flex flex-col xl:flex-row gap-[60px] "
+          className="flex flex-col  xl:flex-row-reverse gap-[60px]  pt-5"
         >
-          <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6 h-[10%]">
-            <TabsTrigger value="about">About me</TabsTrigger>
-            <TabsTrigger value="education">Education</TabsTrigger>
-            <TabsTrigger value="skills">Skills</TabsTrigger>
+          <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6 h-[10%] ">
+            <TabsTrigger onClick={() => changTitle("about")} value="about">
+              About me
+            </TabsTrigger>
+            <TabsTrigger
+              onClick={() => changTitle("education")}
+              value="education"
+            >
+              Education
+            </TabsTrigger>
+            <TabsTrigger onClick={() => changTitle("skills")} value="skills">
+              Skills
+            </TabsTrigger>
           </TabsList>
-          <div className="min-h-[70vh] w-full">
+          <div className=" xl:h-auto w-full ">
             {/*About me*/}
             <TabsContent value="about" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                <h3 className="text-4xl font-bold">{about.title}</h3>
                 <p className="leading-7 text-white/60">{about.description}</p>
                 <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 gap-x-5 max-w-[870px] mx-auto xl:mx-0">
                   {about.info.map((info, index) => (
@@ -233,7 +258,6 @@ const Resume = () => {
             {/*Education*/}
             <TabsContent value="education" className="w-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                <h3 className="text-4xl  font-bold ">{education.title}</h3>
                 <p className="max-w-600px leading-7 text-white/60 mx-auto xl:mx-0">
                   {education.description}
                 </p>
@@ -263,22 +287,24 @@ const Resume = () => {
             <TabsContent value="skills" className="w-full h-full">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
                 <div className="flex flex-col gap-[30px]">
-                  <h3 className="text-4xl font-bold">{skills.title}</h3>
                   <p className="max-w-[600px] leading-7 text-white/60 mx-auto xl:mx-0">
                     {skills.description}
                   </p>
                 </div>
                 <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 xl:gap-[30px]">
                   {skills.skillSets.map((item, index) => (
-                    <li key={index}>
+                    <li
+                      key={index}
+                      className="shadow-md shadow-custom rounded-xl flex justify-center items-center  transition-all duration-300"
+                    >
                       <TooltipProvider delayDuration={100}>
                         <Tooltip>
                           <TooltipTrigger className="w-full h-[130px] bg-[#232329] rounded-xl flex justify-center items-center group">
-                            <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                            <div className="text-6xl group-hover:text-accent transition-all duration-300 ">
                               {item.logo}
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent>
+                          <TooltipContent className="rounded ">
                             <p>{item.name}</p>
                           </TooltipContent>
                         </Tooltip>
