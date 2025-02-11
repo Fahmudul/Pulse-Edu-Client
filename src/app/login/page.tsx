@@ -13,7 +13,7 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<TInputFields>();
   const onSubmit: SubmitHandler<TInputFields> = async (data) => {
     // console.log(data);

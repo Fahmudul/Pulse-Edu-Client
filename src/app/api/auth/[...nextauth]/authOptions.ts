@@ -1,3 +1,4 @@
+import { UserType } from "./../../../../types/global";
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
@@ -14,7 +15,7 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(
         credentials: Record<"email" | "password", string> | undefined
-      ): Promise<any> {
+      ): Promise<UserType | null> {
         try {
           const result = await handleLogin(credentials);
           if (result?.success) {
