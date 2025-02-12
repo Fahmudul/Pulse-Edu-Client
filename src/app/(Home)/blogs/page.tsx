@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Heart,
@@ -8,13 +9,13 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllBlogs } from "@/Utils/getAllData";
 import { BlogDataType } from "@/types/global";
 import moment from "moment";
+import { useGetAllBlogsQuery } from "@/Redux/Features/BlogApi/Blog.api";
 
-const BlogListingPage = async () => {
-  const { data: blogs } = await getAllBlogs();
-  console.log(blogs);
+const BlogListingPage = () => {
+  const { data: blogs } = useGetAllBlogsQuery(undefined);
+  // console.log(blogs);
   return (
     <div
       style={{ backgroundColor: "#131f22" }}
@@ -66,7 +67,7 @@ const BlogListingPage = async () => {
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {blogs.map((blog: BlogDataType, idx:number) => (
+          {blogs?.data?.map((blog: BlogDataType, idx: number) => (
             <div
               key={idx}
               style={{ backgroundColor: "#1a292c" }}
@@ -94,7 +95,6 @@ const BlogListingPage = async () => {
                 >
                   {blog.title}
                 </h2>
-                
 
                 {/* Author and Date */}
                 <div className="flex items-center justify-between mb-4">
@@ -105,7 +105,9 @@ const BlogListingPage = async () => {
                     <div className="w-8 h-8 rounded-full bg-gray-300 mr-2"></div>
                     <div>
                       <p className="text-sm font-medium">Joen Doe</p>
-                      <p className="text-xs opacity-60">{moment(blog.createdAt).fromNow()}</p>
+                      <p className="text-xs opacity-60">
+                        {moment(blog.createdAt).fromNow()}
+                      </p>
                     </div>
                   </div>
                 </div>
