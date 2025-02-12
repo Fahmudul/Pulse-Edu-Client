@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Portfolio & Blog Website
 
-## Getting Started
+## 🚀 Project Overview
+This is a **Personal Portfolio & Blog Website** built using **Next.js** with TypeScript, Tailwind CSS, and MongoDB. The platform showcases personal projects, blogs, and a contact form while also providing an admin dashboard for managing content.
 
-First, run the development server:
+## 🔹 Live Demo
+🔗 [Live Website](https://fahmudul-hassan.vercel.app) *(Replace with your deployed link)*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Tech Stack
+- **Frontend**: Next.js, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: NextAuth.js
+- **Deployment**: Vercel (Frontend), Railway/Render (Backend)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📌 Features
+### 🌍 Public Pages
+✅ **Home Page (/)**
+- Displays name, bio, and profile picture.
+- Showcases skills using icons/skill bar.
+- Features selected projects.
+- Resume download button.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+✅ **Projects Page (/projects)**
+- Lists all projects with images, descriptions, and links.
+- Clicking on a project opens a detailed page (/projects/[id]).
 
-## Learn More
+✅ **Blog Page (/blog)**
+- Displays blogs fetched from the database.
+- Clicking on a blog opens a detailed page (/blog/[id]).
 
-To learn more about Next.js, take a look at the following resources:
+✅ **Contact Page (/contact)**
+- Includes a contact form (Name, Email, Message).
+- Messages are stored in the database.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🔑 Dashboard (Only for Logged-in Users)
+✅ **Authentication (/dashboard)**
+- Social login using NextAuth.
+- Only authenticated users can access the dashboard.
 
-## Deploy on Vercel
+✅ **Blog Management (/dashboard/blogs)**
+- Create, read, update, and delete (CRUD) blog posts.
+- Supports title, content, image, and category fields.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+✅ **Project Management (/dashboard/projects)**
+- CRUD operations for managing projects.
+- Uploads project images, titles, links, and descriptions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+✅ **Message Management (/dashboard/messages)**
+- View messages submitted from the contact form.
+
+---
+
+## 🔹 Technical Features
+✅ **Dynamic Routing**: Implemented for project and blog details pages.
+✅ **API Routes**: Backend handles CRUD operations for blogs, projects, and messages.
+✅ **Authentication**: Implemented using NextAuth (Google, GitHub login supported).
+✅ **SSR & SSG**: Used based on page requirements for SEO optimization.
+✅ **Dark Mode**: Toggle available.
+✅ **Markdown Support**: Blogs can be written in Markdown for better formatting.
+✅ **Animations**: Framer Motion used for smooth UI interactions.
+
+---
+
+## 📜 Installation & Setup
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/your-repo.git
+   cd your-repo
+   ```
+
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+
+3. **Set up environment variables:**
+   Create a `.env.local` file in the root directory and add:
+   ```env
+   NEXTAUTH_URL=http://localhost:3000
+   MONGODB_URI=your_mongodb_connection_string
+   NEXTAUTH_SECRET=your_secret_key
+   GOOGLE_CLIENT_ID=your_google_client_id
+   GOOGLE_CLIENT_SECRET=your_google_client_secret
+   ```
+
+4. **Run the project:**
+   ```sh
+   npm run dev
+   ```
+
+---
+
+
+
+🎯 **Thank you for checking out my portfolio!** 🚀
+
