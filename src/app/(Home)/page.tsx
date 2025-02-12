@@ -8,20 +8,9 @@ import Link from "next/link";
 import Work from "@/components/Work";
 import Resume from "@/components/Resume";
 import Contact from "@/components/Contact";
-import { useRef } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-// import 'animate.css';
 export default function Home() {
-  const ref = useRef<HTMLElement>(null);
-  // const isVisible = useInView(ref);
   return (
-    <main
-      className={"animate__slideInLeft animate__animated"}
-      id="home"
-      ref={ref}
-    >
-      <Header />
+    <main>
       <div className={`container mx-auto `}>
         <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-7 xl:pb-26">
           <div className="text-center xl:text-left order-2 xl:order-none">
@@ -71,7 +60,6 @@ export default function Home() {
       <Resume />
       <Work />
       <Contact />
-      <Footer />
     </main>
   );
 }

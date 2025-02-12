@@ -25,3 +25,36 @@
 .shadow-custom {
   box-shadow: #fee5bf23 0px 5px 15px;
 }
+.custom-table .ant-table {
+  background-color: #1a292c !important;
+  color: #fee5b5 !important;
+}
+.custom-table .ant-table-cell {
+  background-color: #1a292c !important;
+  border-bottom: 1px solid #2a393c !important;
+}
+.custom-table .ant-table-row:hover > td {
+  background-color: #1f2f32 !important;
+}
+.custom-table .ant-pagination-item {
+  background-color: #1a292c !important;
+  border-color: #fee5b5 !important;
+}
+.custom-table .ant-pagination-item a {
+  color: #fee5b5 !important;
+}
+.custom-table .ant-pagination-item-active {
+  border-color: #fee5b5 !important;
+  background-color: #fee5b5 !important;
+}
+.custom-table .ant-pagination-item-active a {
+  color: #131f22 !important;
+}
+.custom-table .ant-pagination-prev button,
+.custom-table .ant-pagination-next button {
+  color: #fee5b5 !important;
+}
+
+.ant-table .ant-table-thead > tr > th {
+  color: #fee5b5;
+}

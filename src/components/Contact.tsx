@@ -5,6 +5,10 @@ import { FaEnvelope, FaMapMarked, FaPhone } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import { useForm } from "react-hook-form";
+import { IMessage } from "@/types/global";
+import { useSendMessageMutation } from "@/Redux/Features/MessageApi/Message.api";
+import { toast } from "sonner";
 const contactInfo = [
   {
     logo: <FaPhone />,
@@ -23,43 +27,30 @@ const contactInfo = [
   },
 ];
 const Contact = () => {
-  // const sendEmail = (e) => {
-  //   e.preventDefault();
-    
-  //   const serviceId = process.env.NEXT_PUBLIC_SERVICE_ID;
-  //   const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
-  //   const publicKey = process.env.NEXT_PUBLIC_USER_ID;
-
-  //   // Create a new object that contains dynamic template params
-  //   const templateParams = {
-  //     from_name: e.target.from_name.value,
-  //     from_email: e.target.from_email.value,
-  //     message: e.target.message.value,
-  //   };
-  //   // Send the email using EmailJS
-  //   emailjs
-  //     .send(serviceId, templateId, templateParams, publicKey)
-  //     .then((response) => {
-  //       toast.success("Email sent successfully!");
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error sending email:", error);
-  //     });
-  // };
+  const { register, handleSubmit, reset } = useForm<IMessage>();
+  const [sendMessage] = useSendMessageMutation(undefined);
+  const handleSendMessage = async (data: IMessage) => {
+    const toastId = toast.loading("Sending messsage...");
+    // const result = await handleContact(data);
+    console.log(data);
+    const { data: result } = await sendMessage(data);
+    if (result?.success) {
+      toast.success("Message Sent Successfully", { id: toastId });
+    } else {
+      const message = result?.message || "Failed to send message";
+      toast.error(message, { id: toastId });
+    }
+    reset();
+  };
   return (
-    <div
-
-      
-      className="py-8"
-      id="Contact"
-    >
+    <div className="py-8 animate__slideInLeft" id="Contact">
       <div className="container mx-auto">
         <div className="flex flex-col  xl:flex-row-reverse gap-[30px]">
           {/*Contact form*/}
-          <div className="xl:h-[56%] order-2 xl:order-none ">
+          <div className="xl:h-[56%] order-2 xl:order-none animate__slideInRight">
             <form
               className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-2xl"
-              // onSubmit={sendEmail}
+              onSubmit={handleSubmit(handleSendMessage)}
             >
               <h3 className="text-4xl font-semibold text-accent">
                 Let{"'"}s Collaborate
@@ -72,17 +63,39 @@ const Contact = () => {
                 <Input
                   type="firstname"
                   placeholder="First Name"
-                  name="from_name"
+                  {...register("firstName", { required: true })}
                   required
                 />
-                <Input type="lastname" placeholder="Last Name" />
-                <Input type="email" placeholder="Email" name="from_email" required/>
-                <Input type="phone" placeholder="Phone" />
+                <Input
+                  type="text"
+                  placeholder="Last Name"
+                  {...register("lastName", { required: true })}
+                  required
+                />
+
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  {...register("email", { required: true })}
+                  required
+                />
+                <Input
+                  type="text"
+                  placeholder="Phone"
+                  {...register("phone", { required: true })}
+                  required
+                />
+                <Input
+                  type="text"
+                  placeholder="Subject"
+                  {...register("subject", { required: true })}
+                  required
+                />
               </div>
               <Textarea
                 className="h-[250px]"
                 placeholder="Type Your Message"
-                name="message"
+                {...register("message", { required: true })}
                 required
               />
               <div className=" flex ">

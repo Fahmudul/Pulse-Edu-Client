@@ -5,6 +5,7 @@ import { SlSocialGoogle } from "react-icons/sl";
 import { signIn } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
+import Link from "next/link";
 export type TInputFields = {
   email: string;
   password?: string;
@@ -103,6 +104,12 @@ const LoginPage = () => {
         </form>
 
         <div className="mt-6 text-center">
+          <p className="mb-2">
+            Don{"'"}t have an account?{" "}
+            <Link className="text-[#fee5b5]" href={"/register"}>
+              Register
+            </Link>
+          </p>
           <p style={{ color: "#fee5b5" }} className="mb-4">
             Or continue with
           </p>

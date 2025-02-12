@@ -4,7 +4,8 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import StairTransition from "@/components/StartTransition";
 import LayoutTransition from "@/components/LayoutTransition";
-import { ThemeProvider } from "@/components/theme-provider";
+// import { ThemeProvider } from "@/components/theme-provider";
+import AppProvider from "@/Provider/AppProvider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -33,18 +34,18 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
         <StairTransition />
         <LayoutTransition>
-          <ThemeProvider
+          {/* <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          > */}
+          <AppProvider>{children}</AppProvider>
+          {/* </ThemeProvider> */}
         </LayoutTransition>
 
         <Toaster />

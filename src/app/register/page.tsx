@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { handleRegister } from "@/Utils/handleRegister";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 export type TRegistrationInputFields = {
   email: string;
   password: string;
@@ -124,6 +125,12 @@ const RegisterPage = () => {
         </form>
 
         <div className="mt-6 text-center">
+          <p className="mb-2">
+            Already have an account?{" "}
+            <Link className="text-[#fee5b5]" href={"/login"}>
+              Login
+            </Link>
+          </p>
           <p style={{ color: "#fee5b5" }} className="mb-4">
             Or continue with
           </p>

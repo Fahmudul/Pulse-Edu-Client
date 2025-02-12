@@ -155,32 +155,37 @@ const Work = () => {
               </ul>
               <div className="border border-white/25"></div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 justify-between">
                 {/*Live Link */}
-                <Link href={currentProject.live}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <GoArrowUpRight className="text-white group-hover:text-accent text-4xl" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Live View</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
-                {/*Github Link */}
-                <Link href={currentProject.github}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsGithub className="text-white group-hover:text-accent text-4xl" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Github repo</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
+                <div className="flex items-center gap-4">
+                  <Link href={currentProject.live}>
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                          <GoArrowUpRight className="text-white group-hover:text-accent text-4xl" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Live View</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                  {/*Github Link */}
+                  <Link href={currentProject.github}>
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                          <BsGithub className="text-white group-hover:text-accent text-4xl" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Github repo</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                </div>
+                <Link href={`/projects/${currentProject.id}`}>
+                  <p className="text-[#fee5b5]">View Details</p>
                 </Link>
               </div>
             </div>
