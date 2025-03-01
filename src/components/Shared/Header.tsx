@@ -5,20 +5,28 @@ import { Button } from "../ui/button";
 
 // import Image from "next/image";
 import "animate.css";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { DropdownMenuDemo } from "../ui/DropDown";
 import MobileStatusBar from "../MobileStatusBar";
 import { Input } from "../ui/input";
 import hat from "../../../public/assets/Adobe Express - file.png";
 import Image from "next/image";
+import { useUser } from "@/Context/UserContext";
 const Header = () => {
-  const { data: session } = useSession();
-  console.log("from session", session);
+  // const { data: session } = useSession();
+  const { user } = useUser();
+  console.log("from session", user);
   return (
-    <header className=" text-white  min-h-[70px] pt-3 sticky top-0 bg-none 0">
+    <header className=" text-white  min-h-[70px] pt-3  bg-none 0">
       <div className="w-[85%] mx-auto flex justify-between items-center">
         <Link href={"/"} className="flex items-center  ">
-          <Image src={hat} alt="logo" width={50} height={50} className=" -rotate-12" />
+          <Image
+            src={hat}
+            alt="logo"
+            width={50}
+            height={50}
+            className=" -rotate-12"
+          />
           <h1 className="text-primary text-3xl font-bold">PulseEdu</h1>
         </Link>
         <Input
@@ -27,9 +35,9 @@ const Header = () => {
         />
         <div className="hidden xl:flex items-center gap-7 ">
           <Navbar />
-          {session?.user ? (
+          {user ? (
             <>
-              <DropdownMenuDemo role={session.user.role} />
+              <DropdownMenuDemo role={user?.role} />
             </>
           ) : (
             <>

@@ -1,34 +1,10 @@
-import { UserType } from "./../../../../types/global";
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
-import handleLogin from "@/Utils/handleLogin";
+
 const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(
-        credentials: Record<"email" | "password", string> | undefined
-      ): Promise<UserType | null> {
-        try {
-          const result = await handleLogin(credentials);
-          if (result?.success) {
-            const user = result?.data;
-            return user;
-          } else {
-            return null;
-          }
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (error: unknown) {
-          throw new Error("Failed to login");
-        }
-      },
-    }),
+ 
     GoogleProvider({
       profile(profile) {
         return { ...profile, id: profile.sub, role: "user" };

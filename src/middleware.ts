@@ -1,35 +1,35 @@
+import { jwtDecode } from "jwt-decode";
 import { getToken } from "next-auth/jwt";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getUser } from "./Utils/getUser";
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   // Current route
   const route = request.nextUrl.pathname;
-  const token = await getToken({
-    req: request,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
+  const user = await getUser();
   const isPublicRoute = route === "/login" || route === "/register";
-  if (!token && !isPublicRoute) {
+  if (!user && !isPublicRoute) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
-  if (isPublicRoute && token) {
+  if (isPublicRoute && user) {
     const redirectRoute =
-      token && token.role === "admin"
+      user && user?.role === "admin"
         ? "/dashboard/admin/analytics"
-        : "/dashboard/user/profile";
+        : `/dashboard/${user?.role}/add-blog`;
     return NextResponse.redirect(new URL(redirectRoute, request.url));
   }
   if (
-    token &&
-    ((token.role === "admin" && route.startsWith("/dashboard/user")) ||
-      (token.role === "user" && route.startsWith("/dashboard/admin")))
+    user &&
+    ((user?.role === "admin" && route.startsWith("/dashboard/user")) ||
+      (user?.role === "student" && route.startsWith("/dashboard/admin")))
   ) {
     const redirectRoute =
-      token.role === "admin"
+    user?.role === "admin"
         ? "/dashboard/admin/analytics"
-        : "/dashboard/user/profile";
+        : `/dashboard/${user?.role}/add-blog`;
     return NextResponse.redirect(new URL(redirectRoute, request.url));
   }
 }

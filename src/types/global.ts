@@ -1,9 +1,7 @@
-export type UserType = {
+export type TUserType = {
   id: string;
   name: string;
   email: string;
-  emailVerified: string;
-  image: string;
   role: string;
 };
 export type FormDataType = {

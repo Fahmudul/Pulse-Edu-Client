@@ -15,8 +15,8 @@ export function DropdownMenuDemo({ role }: { role: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="rounded-full w-10 h-10 border border-[#fee5b5]  flex justify-center items-center">
-          <User />
+        <button className="rounded-full w-10 h-10 border border-[#131f22]  flex justify-center items-center">
+          <User className="text-primary" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-10">

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-const CourseCard = () => {
+const SubjectCard = () => {
   return (
     <div className="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden">
       {/* Background Image */}
@@ -61,4 +61,4 @@ const CourseCard = () => {
   );
 };
 
-export default CourseCard;
+export default SubjectCard;

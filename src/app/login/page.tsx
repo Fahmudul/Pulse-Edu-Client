@@ -6,9 +6,10 @@ import { signIn } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import Link from "next/link";
+import handleLogin from "@/Utils/handleLogin";
 export type TInputFields = {
   email: string;
-  password?: string;
+  password: string;
 };
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,14 +21,16 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<TInputFields> = async (data) => {
     // console.log(data);
     const toastId = toast.loading("Logging in...");
-    signIn("credentials", { ...data }).then((res) => {
-      if (res?.error) {
-        toast.error(res.error, { id: toastId });
-      } else {
-        toast.success("Login successful", { id: toastId, duration: 2000 });
-        fetch("/api/auth/refresh").then((res) => res.json());
+    try {
+      const res = await handleLogin(data);
+      console.log(res);
+      if (res?.success) {
+        toast.success(res?.message, { id: toastId });
       }
-    });
+    } catch (error) {
+      toast.error(error as string);
+      console.log(error);
+    }
   };
   const socialLogins = [
     {

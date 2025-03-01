@@ -1,19 +1,22 @@
 "use client";
-import { store } from "@/Redux/store";
-import { SessionProvider } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import UserProvider from "@/Context/UserContext";
+import { AppStore, makeStore } from "@/Redux/store";
+
+import React, { useRef } from "react";
 import { Provider } from "react-redux";
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      setVisible(true);
-    }, 1000);
-  });
+  const ref = useRef<AppStore | null>(null);
+  // const [loading, setLoading] = useState(true);
+  // const [user, setUser] = useState(null);
+  // useEffect(() => {});
+  if (!ref.current) {
+    ref.current = makeStore();
+  }
+
   return (
-    <SessionProvider>
-      <Provider store={store}>{visible && children}</Provider>
-    </SessionProvider>
+    <UserProvider>
+      <Provider store={ref.current}>{children}</Provider>;
+    </UserProvider>
   );
 };
 export default AppProvider;

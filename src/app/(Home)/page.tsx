@@ -13,7 +13,7 @@ import PrimaryContainer from "@/components/Shared/PrimaryContainer";
 import { FaAirbnb, FaAmazon } from "react-icons/fa";
 import { SiFiverr, SiUdemy, SiUpwork } from "react-icons/si";
 import Title from "@/components/Shared/Title";
-import CourseCard from "@/components/Shared/CourseCard";
+import CourseCard from "@/components/Subjects/SubjectCard";
 export default function Home() {
   return (
     <main>

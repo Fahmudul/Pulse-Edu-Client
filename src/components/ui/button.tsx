@@ -5,11 +5,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "intine-flex items-center justify-center whitespace-nowrap rounded-full text-base font-semibold  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ",
+  "intine-flex items-center justify-center whitespace-nowrap rounded-lg text-base font-semibold  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors ",
   {
     variants: {
       variant: {
-        default: "bg-accent text-primary hover:bg-accent-hover ",
+        default: "bg-primary text-primaryPro hover:bg-accent-hover ",
         primary: "bg-primary text-white",
         outline:
           "border border-accent bg-transparent text-accent hover:bg-accent hover:text-primary",
