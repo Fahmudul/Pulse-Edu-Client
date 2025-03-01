@@ -10,16 +10,16 @@ const NavItems = [
     path: "/",
   },
   {
-    name: "Resume",
-    path: "/resume",
+    name: "Tutors",
+    path: "/tutor",
   },
   {
-    name: "Work",
+    name: "About Us",
     path: "/work",
   },
   {
-    name: "Contact",
-    path: "/contact",
+    name: "Courses",
+    path: "/courses",
   },
 ];
 const MobileStatusBar = () => {
@@ -27,15 +27,12 @@ const MobileStatusBar = () => {
   return (
     <Sheet>
       <SheetTrigger className="flex justify-center items-center">
-        <CiMenuFries className="text-[32px] text-accent" />
+        <CiMenuFries className="text-[32px] text-primary" />
       </SheetTrigger>
-      <SheetContent className="flex flex-col">
-        <div className="mt-32 text-center text-2xl">
+      <SheetContent className="flex flex-col bg-primaryPro min-h-10 border border-red-500">
+        <div className="mt-32 mb-8 text-center text-2xl">
           <Link href="/">
-            <h1 className="text-3xl font-semibold">
-              Fahmudul
-              <br /> Hassan<span className="text-blue-500">_</span>
-            </h1>
+            <h1 className="text-3xl font-bold text-primary">PulseEdu</h1>
           </Link>
         </div>
         <nav className="flex flex-col justify-center items-center gap-8">
@@ -44,8 +41,9 @@ const MobileStatusBar = () => {
               href={item.path}
               key={idx}
               className={`${
-                pathName === item.path && "text-accent border-b-2 px-1 border-accent"
-              } font-medium hover:text-accent transition-all duration-300 text-xl`}
+                pathName === item.path &&
+                "text-primary border-b-2 px-1 border-primary"
+              } font-medium text-primary transition-all duration-300 text-xl`}
             >
               {item.name}
             </Link>

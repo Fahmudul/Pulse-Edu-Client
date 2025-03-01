@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import BlogForm from "@/components/BlogForm";
+import BlogForm from "@/components/AddForm/BlogForm";
 import BlogTable from "@/components/table";
 
 const AddBlog = () => {

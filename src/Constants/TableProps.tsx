@@ -1,5 +1,5 @@
 // "use client"
-import { ActionDropdown } from "@/components/ActionDropDown";
+import { ActionDropdown } from "@/components/ui/ActionDropDown";
 import { DataType, IProjectDataType } from "@/types/global";
 import { Space, TableProps } from "antd";
 

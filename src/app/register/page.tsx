@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Github } from "lucide-react";
+import { Eye, EyeClosed, Github } from "lucide-react";
 import { SlSocialGoogle } from "react-icons/sl";
 import { signIn } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -14,6 +14,7 @@ export type TRegistrationInputFields = {
   name: string;
 };
 const RegisterPage = () => {
+  const [showPassword, setShowPassword] = React.useState(false);
   const router = useRouter();
   const {
     register,
@@ -39,30 +40,30 @@ const RegisterPage = () => {
     {
       name: "Google",
       icon: <SlSocialGoogle className="w-6 h-6" />,
-      bgColor: "#e8d3a7",
-      textColor: "#000",
+      bgColor: "#fff",
+      textColor: "#093B3B",
       onClick: () => signIn("google"),
     },
     {
       name: "Github",
       icon: <Github className="w-6 h-6" />,
-      bgColor: "#fee5b5",
-      textColor: "#131f22",
+      bgColor: "#fff",
+      textColor: "#093B3B",
       onClick: () => signIn("github"),
     },
   ];
 
   return (
     <div
-      style={{ backgroundColor: "#131f22" }}
+      style={{ backgroundColor: "#e8f4f4" }}
       className="min-h-screen flex items-center justify-center p-4"
     >
       <div
-        style={{ backgroundColor: "#1a292c" }}
+        style={{ backgroundColor: "#fff" }}
         className="w-full max-w-md p-8 rounded-lg shadow-lg"
       >
         <h2
-          style={{ color: "#fee5b5" }}
+          style={{ color: "#093B3B" }}
           className="text-3xl font-bold text-center mb-8"
         >
           Login
@@ -74,9 +75,9 @@ const RegisterPage = () => {
               {...register("name", { required: true })}
               placeholder="Name"
               style={{
-                backgroundColor: "#131f22",
-                color: "#fee5b5",
-                borderColor: "#fee5b5",
+                backgroundColor: "#f5f9f9",
+                color: "#093B3B",
+                borderColor: "#093B3B",
               }}
               className="w-full p-3 rounded border focus:outline-none"
               required
@@ -88,50 +89,60 @@ const RegisterPage = () => {
               {...register("email", { required: true })}
               placeholder="Email"
               style={{
-                backgroundColor: "#131f22",
-                color: "#fee5b5",
-                borderColor: "#fee5b5",
+                backgroundColor: "#f5f9f9",
+                color: "#093B3B",
+                borderColor: "#093B3B",
               }}
               className="w-full p-3 rounded border focus:outline-none"
               required
             />
           </div>
 
-          <div>
+          <div className="relative">
             <input
               placeholder="Password"
               {...register("password", { required: true })}
               style={{
-                backgroundColor: "#131f22",
-                color: "#fee5b5",
-                borderColor: "#fee5b5",
+                backgroundColor: "#f5f9f9",
+                color: "#093B3B",
+                borderColor: "#093B3B",
               }}
-              type="password"
               className="w-full p-3 rounded border focus:outline-none"
               required
+              type={showPassword ? "text" : "password"}
             />
+            <div
+              className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <Eye className="w-4 h-4 text-gray-400" />
+              ) : (
+                <EyeClosed className="w-4 h-4 text-gray-400" />
+              )}
+            </div>
           </div>
 
           <button
             type="submit"
             style={{
-              backgroundColor: "#fee5b5",
-              color: "#131f22",
+              backgroundColor: "#093B3B",
+              color: "#fff",
             }}
             className="w-full p-3 rounded font-bold hover:opacity-90 transition-opacity"
           >
-            Login
+            Register
           </button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="mb-2">
             Already have an account?{" "}
-            <Link className="text-[#fee5b5]" href={"/login"}>
+            <Link className="text-teal-800 font-medium" href={"/login"}>
               Login
             </Link>
           </p>
-          <p style={{ color: "#fee5b5" }} className="mb-4">
+          <p style={{ color: "#093B3B" }} className="mb-4">
             Or continue with
           </p>
 
@@ -143,6 +154,7 @@ const RegisterPage = () => {
                 style={{
                   backgroundColor: social.bgColor,
                   color: social.textColor,
+                  border: "1px solid #093B3B",
                 }}
                 className="p-3 rounded-full flex items-center justify-center hover:opacity-90 transition-opacity"
                 onClick={social.onClick}

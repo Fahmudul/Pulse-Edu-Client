@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-import StairTransition from "@/components/StartTransition";
-import LayoutTransition from "@/components/LayoutTransition";
+
+
 // import { ThemeProvider } from "@/components/theme-provider";
 import AppProvider from "@/Provider/AppProvider";
 const geistSans = Geist({
@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fahmudul Hassan ",
+  title: "Pulse Edu",
 };
 
 export default function RootLayout({
@@ -28,25 +28,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
+        {/* <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-        />
+        /> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
-        <StairTransition />
-        <LayoutTransition>
-          {/* <ThemeProvider
+        {/* <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           > */}
-          <AppProvider>{children}</AppProvider>
-          {/* </ThemeProvider> */}
-        </LayoutTransition>
+        <AppProvider>{children}</AppProvider>
+        {/* </ThemeProvider> */}
 
         <Toaster />
       </body>

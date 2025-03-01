@@ -1,4 +1,4 @@
-import AddProjectForm from "@/components/AddProjectForm";
+import AddProjectForm from "@/components/AddForm/AddProjectForm";
 import ProjectTable from "@/components/ProjectTable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 

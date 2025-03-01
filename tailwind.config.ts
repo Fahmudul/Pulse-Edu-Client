@@ -23,7 +23,8 @@ export default {
     },
     extend: {
       colors: {
-        primary: "#131f22",
+        primary: "#093B3B",
+        primaryPro: "#E8F6F3",
         // secondary: "var(--color-secondary)",
         accent: {
           DEFAULT: "#fee5b5",
