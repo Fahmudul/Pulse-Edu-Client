@@ -23,12 +23,14 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<TUserType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    console.log("called");
     const currentUser = async () => {
       const user = await getUser();
       setUser(user);
     };
     currentUser();
   }, [isLoading]);
+  console.log("from line 33", user);
   return (
     <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>
       {children}

@@ -1,3 +1,4 @@
+import { handleLogout } from "@/Utils/handleLogout";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,12 +7,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { User } from "lucide-react";
-import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function DropdownMenuDemo({ role }: { role: string }) {
   const redirectUrl =
-    role === "admin" ? "/dashboard/admin/analytics" : "/dashboard/user/profile";
+    role === "admin"
+      ? "/dashboard/admin/analytics"
+      : "/dashboard/student/profile";
+  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,7 +30,10 @@ export function DropdownMenuDemo({ role }: { role: string }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="hover:text-primary hover:bg-[#fee5b5]"
-          onClick={() => signOut()}
+          onClick={() => {
+            handleLogout();
+            router.push("/login");
+          }}
         >
           Log out
         </DropdownMenuItem>

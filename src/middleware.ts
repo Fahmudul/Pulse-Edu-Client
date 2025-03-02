@@ -10,6 +10,7 @@ export async function middleware(request: NextRequest) {
   // Current route
   const route = request.nextUrl.pathname;
   const user = await getUser();
+  console.log("from line 13",user)
   const isPublicRoute = route === "/login" || route === "/register";
   if (!user && !isPublicRoute) {
     return NextResponse.redirect(new URL("/login", request.url));

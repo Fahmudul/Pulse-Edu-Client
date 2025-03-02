@@ -7,29 +7,44 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import Link from "next/link";
 import handleLogin from "@/Utils/handleLogin";
+import { useUser } from "@/Context/UserContext";
+import { useRouter } from "next/navigation";
 export type TInputFields = {
   email: string;
   password: string;
 };
 const LoginPage = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     // formState: { errors },
   } = useForm<TInputFields>();
+  const { user, setIsLoading, setUser } = useUser();
+  // console.log(isLoading);
   const onSubmit: SubmitHandler<TInputFields> = async (data) => {
     // console.log(data);
+    // setIsLoading(true);
     const toastId = toast.loading("Logging in...");
     try {
-      const res = await handleLogin(data);
-      console.log(res);
-      if (res?.success) {
-        toast.success(res?.message, { id: toastId });
+      const { result, decodedData } = await handleLogin(data);
+      if (result?.success) {
+        toast.success(result?.message, { id: toastId });
+        setUser(decodedData)
+        if (decodedData) {
+          console.log(`Redirecting to: /dashboard/${decodedData.role}/profile`);
+          router.push(`/dashboard/${decodedData.role}/profile`);
+        } else {
+          router.push("/");
+        }
+        setIsLoading(false);
       }
     } catch (error) {
       toast.error(error as string);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const socialLogins = [

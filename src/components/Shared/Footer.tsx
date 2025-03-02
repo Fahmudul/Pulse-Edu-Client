@@ -5,7 +5,7 @@ import Image from "next/image";
 import hat from "../../app/hat.svg";
 const Footer = () => {
   return (
-    <div className="h-[60%]  md:h-[490px] bg-primary   flex justify-center items-center w-full mx-auto">
+    <div className="h-[60%]  md:h-[100%] bg-primary   flex justify-center items-center w-full mx-auto">
       <div className="w-[85%]  my-10 mx-auto text-primaryPro flex flex-col gap-10">
         <div className="flex gap-8 justify-between lg:flex-row flex-col items-center md:items-start md:text-start text-center [&>div>p:not(:first-child)]:cursor-pointer  [&>div>p:not(:first-child)]:hover:text-primaryPro  [&>div>p:not(:first-child)]:mb-2">
           <div>

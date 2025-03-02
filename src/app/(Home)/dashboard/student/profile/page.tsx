@@ -17,6 +17,13 @@ import { StudentTabs } from "@/components/Student/StudentTabs";
 import { CiSearch } from "react-icons/ci";
 import { Input } from "@/components/ui/input";
 import SubjectProgressCard from "@/components/Subjects/SubjectProgressCard";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
+import TeacherCard from "@/components/Teacher/TeacherCard";
 const UserProfile = () => {
   const { user } = useUser();
   return (
@@ -114,8 +121,11 @@ const UserProfile = () => {
               </div>
             </TabsContent>
             <TabsContent value="subjects">
+              <p className="text-2xl font-bold text-primary my-6">
+                Subjects (90)
+              </p>
               {/* Filter Options */}
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center justify-between gap-4 mt-5">
                 <div className="flex-1 flex flex-col gap-3">
                   <label htmlFor="">Search</label>
                   <span className="flex items-center gap-3 bg-white px-2 rounded-md">
@@ -126,41 +136,60 @@ const UserProfile = () => {
                     />
                   </span>
                 </div>
-                <div className="flex-1 flex flex-col gap-3">
+                <div className=" flex flex-col gap-3 w-[15%]">
                   <label htmlFor="">Sort By</label>
-                  <span className="flex items-center gap-3 bg-white px-2 rounded-md">
-                    <CiSearch className=" text-2xl" />
-                    <Input
-                      placeholder="Search for Tutors"
-                      className=" flex-1"
-                    />
-                  </span>
+                  <Select>
+                    <SelectTrigger className="w-[100%] px-2 h-[45px] rounded-md bg-white">
+                      Course
+                    </SelectTrigger>
+                    <SelectContent className="w-[30px]">
+                      <SelectItem value="Math">Math</SelectItem>
+                      <SelectItem value="Science">Science</SelectItem>
+                      <SelectItem value="English">English</SelectItem>
+                      <SelectItem value="History">History</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
-                <div className="flex-1 flex flex-col gap-3">
+                <div className=" flex flex-col gap-3 w-[15%]">
                   <label htmlFor="">Status</label>
-                  <span className="flex items-center gap-3 bg-white px-2 rounded-md">
-                    <CiSearch className=" text-2xl" />
-                    <Input
-                      placeholder="Search for Tutors"
-                      className=" flex-1"
-                    />
-                  </span>
+                  <Select>
+                    <SelectTrigger className="w-[100%] px-2 h-[45px] rounded-md bg-white">
+                      Course
+                    </SelectTrigger>
+                    <SelectContent className="w-[30px]">
+                      <SelectItem value="Math">Math</SelectItem>
+                      <SelectItem value="Science">Science</SelectItem>
+                      <SelectItem value="English">English</SelectItem>
+                      <SelectItem value="History">History</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
-                <div className="flex-1 flex flex-col gap-3">
+                <div className=" flex flex-col gap-3 w-[15%]">
                   <label htmlFor="">Search</label>
-                  <span className="flex items-center gap-3 bg-white px-2 rounded-md">
-                    <CiSearch className=" text-2xl" />
-                    <Input
-                      placeholder="Search for Tutors"
-                      className=" flex-1"
-                    />
-                  </span>
+                  <Select>
+                    <SelectTrigger className="w-[100%] px-2 h-[45px] rounded-md bg-white">
+                      Course
+                    </SelectTrigger>
+                    <SelectContent className="w-[30px]">
+                      <SelectItem value="Math">Math</SelectItem>
+                      <SelectItem value="Science">Science</SelectItem>
+                      <SelectItem value="English">English</SelectItem>
+                      <SelectItem value="History">History</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
-              <div></div>
+              <div className="grid grid-cols-1 mt-10 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+                {Array(12)
+                  .fill(0)
+                  .map((item, index) => (
+                    <SubjectProgressCard key={index} />
+                  ))}
+              </div>
             </TabsContent>
             <TabsContent value="teachers">
-              Change your password here.
+              <TeacherCard />
+                
             </TabsContent>
             <TabsContent value="message">
               Change your password here.
