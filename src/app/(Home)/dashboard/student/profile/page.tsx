@@ -188,8 +188,50 @@ const UserProfile = () => {
               </div>
             </TabsContent>
             <TabsContent value="teachers">
-              <TeacherCard />
-                
+              {/* Filter options */}
+              <div className="flex items-center justify-between gap-4 mt-5">
+                <div className="flex-1 flex flex-col gap-3">
+                  <label htmlFor="">Search</label>
+                  <span className="flex items-center gap-3 bg-white px-2 rounded-md">
+                    <CiSearch className=" text-2xl" />
+                    <Input
+                      placeholder="Search for Tutors"
+                      className=" flex-1"
+                    />
+                  </span>
+                </div>
+                <div className=" flex flex-col gap-3 w-[15%]">
+                  <label htmlFor="">Subjects</label>
+                  <Select>
+                    <SelectTrigger className="w-[100%] px-2 h-[45px] rounded-md bg-white">
+                      Course
+                    </SelectTrigger>
+                    <SelectContent className="w-[30px]">
+                      <SelectItem value="Math">Math</SelectItem>
+                      <SelectItem value="Science">Science</SelectItem>
+                      <SelectItem value="English">English</SelectItem>
+                      <SelectItem value="History">History</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className=" flex flex-col gap-3 w-[15%]">
+                  <label htmlFor="">All Teachers</label>
+                  <Select>
+                    <SelectTrigger className="w-[100%] px-2 h-[45px] rounded-md bg-white">
+                      Course
+                    </SelectTrigger>
+                    <SelectContent className="w-[30px]">
+                      <SelectItem value="Math">Math</SelectItem>
+                      <SelectItem value="Science">Science</SelectItem>
+                      <SelectItem value="English">English</SelectItem>
+                      <SelectItem value="History">History</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="mt-5">
+                <TeacherCard />
+              </div>
             </TabsContent>
             <TabsContent value="message">
               Change your password here.

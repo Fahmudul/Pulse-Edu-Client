@@ -1,16 +1,10 @@
+import { User } from "lucide-react";
 import React from "react";
-import { Button } from "../ui/button";
 
-const TeacherCard = ({
-  className,
-  hideButton,
-}: {
-  className?: string;
-  hideButton?: boolean;
-}) => {
+const TeacherSubjectCard = () => {
   return (
     <div
-      className={`w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden ${className}`}
+      className={`w-full max-w-sm bg-[#F9FAFB] rounded-lg shadow-lg overflow-hidden`}
     >
       {/* Background Image */}
       <div
@@ -24,24 +18,28 @@ const TeacherCard = ({
       {/* Card Content */}
       <div className=" ">
         {/* Name and Title */}
-        <div className="py-3 border-b border-b-primary flex flex-col justify-center items-center ">
-          <h3 className=" text-lg font-bold text-gray-800">Jane Smith</h3>
-          <p className="text-sm font-medium" style={{ color: "#093B3B" }}>
-            UX/UI Designer
-          </p>
+        <div className="px-3 mt-5   ">
+          <span className=" text-xs font-semibold bg-[#EBEBFF] px-2 py-1 rounded-md text-[#342F98]">
+            DEVELOPMENTS
+          </span>
+        </div>
+        <div className="px-3 mt-3  flex flex-col justify-center ">
+          <h3 className=" text-lg font-semibold text-gray-800">
+            Machine Learning A-Z™: Hands-On Python & R In Data Science
+          </h3>
         </div>
         {/* Description */}
         <div className="px-4">
           {/* Rating */}
           <div className="my-4 flex justify-between items-center">
-            <div className="flex flex-row-reverse items-center">
+            <div className="flex flex-row-reverse  gap-1 items-center">
               <span className="text-lg font-bold" style={{ color: "#093B3B" }}>
                 4.9
               </span>
-              <div className="flex ">
+              <div className="">
                 <svg
-                  className="w-4 h-4 fill-current"
-                  style={{ color: "#093B3B" }}
+                  className="w-6 h-6 fill-current"
+                  style={{ color: "#FD8E1F" }}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -49,15 +47,15 @@ const TeacherCard = ({
                 </svg>
               </div>
             </div>
-            <span className="ml-2 text-md text-gray-500">
+            <span className="ml-2 text-md text-gray-500 flex items-center gap-1">
+              <User className="w-6 h-6" />
               <span className="text-primary font-semibold">3123</span> students
             </span>
           </div>
-          {!hideButton && <Button className="w-full my-4">Send Message</Button>}
         </div>
       </div>
     </div>
   );
 };
 
-export default TeacherCard;
+export default TeacherSubjectCard;

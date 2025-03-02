@@ -12,27 +12,27 @@ export async function middleware(request: NextRequest) {
   const user = await getUser();
   console.log("from line 13",user)
   const isPublicRoute = route === "/login" || route === "/register";
-  if (!user && !isPublicRoute) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-  if (isPublicRoute && user) {
-    const redirectRoute =
-      user && user?.role === "admin"
-        ? "/dashboard/admin/analytics"
-        : `/dashboard/${user?.role}/add-blog`;
-    return NextResponse.redirect(new URL(redirectRoute, request.url));
-  }
-  if (
-    user &&
-    ((user?.role === "admin" && route.startsWith("/dashboard/user")) ||
-      (user?.role === "student" && route.startsWith("/dashboard/admin")))
-  ) {
-    const redirectRoute =
-    user?.role === "admin"
-        ? "/dashboard/admin/analytics"
-        : `/dashboard/${user?.role}/add-blog`;
-    return NextResponse.redirect(new URL(redirectRoute, request.url));
-  }
+  // if (!user && !isPublicRoute) {
+  //   return NextResponse.redirect(new URL("/login", request.url));
+  // }
+  // if (isPublicRoute && user) {
+  //   const redirectRoute =
+  //     user && user?.role === "admin"
+  //       ? "/dashboard/admin/analytics"
+  //       : `/dashboard/${user?.role}/add-blog`;
+  //   return NextResponse.redirect(new URL(redirectRoute, request.url));
+  // }
+  // if (
+  //   user &&
+  //   ((user?.role === "admin" && route.startsWith("/dashboard/user")) ||
+  //     (user?.role === "student" && route.startsWith("/dashboard/admin")))
+  // ) {
+  //   const redirectRoute =
+  //   user?.role === "admin"
+  //       ? "/dashboard/admin/analytics"
+  //       : `/dashboard/${user?.role}/add-blog`;
+  //   return NextResponse.redirect(new URL(redirectRoute, request.url));
+  // }
 }
 
 // See "Matching Paths" below to learn more
