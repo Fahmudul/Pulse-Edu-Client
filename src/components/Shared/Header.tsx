@@ -31,7 +31,7 @@ const Header = () => {
         </Link>
         <Input
           placeholder="Search by tutor, course "
-          className="bg-white w-[50%] mx-10"
+          className="bg-white text-primary w-[50%] mx-10"
         />
         <div className="hidden xl:flex items-center gap-7 ">
           <Navbar />
@@ -42,9 +42,7 @@ const Header = () => {
           ) : (
             <>
               <Link href={"/login"}>
-                <Button className="bg-[#136E61] text-white active:scale-95 transition-all duration-300  hover:bg-[#083832]">
-                  Login
-                </Button>
+                <Button className="">Login</Button>
               </Link>
             </>
           )}

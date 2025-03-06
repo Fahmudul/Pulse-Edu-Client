@@ -1,16 +1,22 @@
 import React from "react";
 import { Button } from "../ui/button";
+import { Users2 } from "lucide-react";
+import { ITeacher } from "@/types/global";
+import Link from "next/link";
 
 const TeacherCard = ({
   className,
   hideButton,
+  teacher,
 }: {
   className?: string;
   hideButton?: boolean;
+  teacher?: ITeacher;
 }) => {
+  console.log("teacher", teacher);
   return (
     <div
-      className={`w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden ${className}`}
+      className={`w-full max-w-sm bg-primaryPro rounded-lg shadow-lg overflow-hidden ${className}`}
     >
       {/* Background Image */}
       <div
@@ -24,11 +30,19 @@ const TeacherCard = ({
       {/* Card Content */}
       <div className=" ">
         {/* Name and Title */}
-        <div className="py-3 border-b border-b-primary flex flex-col justify-center items-center ">
-          <h3 className=" text-lg font-bold text-gray-800">Jane Smith</h3>
-          <p className="text-sm font-medium" style={{ color: "#093B3B" }}>
+        <div className="py-3 w-full  pl-4  flex flex-col justify-center items-start ">
+          <Link
+            href={`/teacher/${teacher?._id}`}
+            className="  text-2xl font-bold text-primary"
+          >
+            Jane Smith
+          </Link>
+          <p className="   text-lg " style={{ color: "#093B3B" }}>
             UX/UI Designer
           </p>
+        </div>
+        <div className="mx-4 text-primary">
+          A profession UI/UX Designer. With over 5+ years of experience
         </div>
         {/* Description */}
         <div className="px-4">
@@ -49,8 +63,11 @@ const TeacherCard = ({
                 </svg>
               </div>
             </div>
-            <span className="ml-2 text-md text-gray-500">
-              <span className="text-primary font-semibold">3123</span> students
+            <span className="ml-2 text-md text-gray-500 flex gap-2">
+              <span className="text-primary font-semibold flex items-center gap-1">
+                <Users2 /> 3123
+              </span>{" "}
+              students
             </span>
           </div>
           {!hideButton && <Button className="w-full my-4">Send Message</Button>}

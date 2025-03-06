@@ -6,7 +6,7 @@ import Teacher from "../../../public/assets/teacher.png";
 import Image from "next/image";
 const Banner = () => {
   return (
-    <div className="flex flex-col xl:flex-row items-center justify-between gap-4 px-10 bg-primary rounded-lg xl:h-[650px]">
+    <div className="flex flex-col xl:flex-row items-center justify-between gap-4 px-10 bg-primary rounded-xl xl:h-[650px]">
       <div className="flex flex-col gap-4 ml-7">
         <h3 className="text-3xl text-white fond-bold">P U L S E E D U</h3>
         <h1 className="xl:text-7xl font-semibold text-white">

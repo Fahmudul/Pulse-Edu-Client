@@ -24,6 +24,7 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import TeacherCard from "@/components/Teacher/TeacherCard";
+import Loader from "@/components/Loader/Loader";
 const UserProfile = () => {
   const { user } = useUser();
   return (

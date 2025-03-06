@@ -8,7 +8,7 @@ export default function Home({ children }: { children: React.ReactNode }) {
 
   return (
     <main className="relative" ref={ref}>
-      <div className="bg-primaryPro border  w-full lg:p-8 ">
+      <div className="bg-primaryPro   w-full lg:p-8 ">
         <Header />
       </div>
       {children}

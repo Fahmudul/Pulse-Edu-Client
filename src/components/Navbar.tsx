@@ -8,8 +8,8 @@ const NavItems = [
     path: "/",
   },
   {
-    name: "Tutors",
-    path: "/tutor",
+    name: "Teachers",
+    path: "/teacher",
   },
   {
     name: "About Us",
@@ -24,7 +24,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-9  ">
+    <nav className="flex gap-7  ">
       {NavItems.map((item) => {
         return (
           <Link

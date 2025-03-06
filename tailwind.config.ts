@@ -27,7 +27,7 @@ export default {
         primaryPro: "#E8F6F3",
         // secondary: "var(--color-secondary)",
         accent: {
-          DEFAULT: "#fee5b5",
+          DEFAULT: "#e8f6f3",
           hover: "#659cf5",
         },
       },

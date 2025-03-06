@@ -9,6 +9,8 @@ import Link from "next/link";
 import handleLogin from "@/Utils/handleLogin";
 import { useUser } from "@/Context/UserContext";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/Redux/hooks";
+import { setUser } from "@/Redux/Features/Auth/AuthSlice";
 export type TInputFields = {
   email: string;
   password: string;
@@ -16,12 +18,13 @@ export type TInputFields = {
 const LoginPage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     // formState: { errors },
   } = useForm<TInputFields>();
-  const { user, setIsLoading, setUser } = useUser();
+  // const { user, setIsLoading, setUser } = useUser();
   // console.log(isLoading);
   const onSubmit: SubmitHandler<TInputFields> = async (data) => {
     // console.log(data);
@@ -29,22 +32,24 @@ const LoginPage = () => {
     const toastId = toast.loading("Logging in...");
     try {
       const { result, decodedData } = await handleLogin(data);
+      console.log("from login", result);
       if (result?.success) {
         toast.success(result?.message, { id: toastId });
-        setUser(decodedData)
+        // setUser(decodedData);
+        dispatch(setUser(decodedData));
         if (decodedData) {
           console.log(`Redirecting to: /dashboard/${decodedData.role}/profile`);
           router.push(`/dashboard/${decodedData.role}/profile`);
         } else {
           router.push("/");
         }
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     } catch (error) {
       toast.error(error as string);
       console.log(error);
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   };
   const socialLogins = [

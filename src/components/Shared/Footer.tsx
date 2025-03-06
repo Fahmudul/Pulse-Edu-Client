@@ -59,7 +59,7 @@ const Footer = () => {
 
         <div className="text-center flex flex-col gap-3">
           <hr />
-          <span className="p-5">All Right Reserved © 2025 Book Bliss</span>
+          <span className="p-5">All Right Reserved © 2025 Pulse Edu</span>
         </div>
       </div>
     </div>

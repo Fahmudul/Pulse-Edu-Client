@@ -1,3 +1,6 @@
+import { Option } from "@/components/ui/multiple-selector";
+import { DateRange } from "react-day-picker";
+
 export type TUserType = {
   id: string;
   name: string;
@@ -51,15 +54,68 @@ export interface IMessage {
   subject: string;
   createdAt?: string;
 }
-export type TProject = {
+interface TimeSlot {
+  startTime: string;
+  endTime: string;
+  isBooked?: boolean;
+}
+export interface IAvailability {
+  [key: string]: TimeSlot[];
+}
+
+export interface ISchedule {
+  [key: string]: { startTime: string; endTime: string };
+}
+
+export interface IBookingData {
+  student?: string;
+  teacher?: string | string[];
+  schedule?: ISchedule;
+  subject?: string;
+  duration?: number;
+}
+
+// Booking session
+export interface IBookingData {
+  student?: string;
+  teacher?: string;
+  schedule?: ISchedule;
+  subject?: string;
+  duration?: number;
+}
+
+export type Subject = {
   _id: string;
-  title: string;
-  liveLink: string;
-  githubLink: string;
+  name: string;
+  category: string;
   description: string;
-  image: string;
-  techStack: string[];
-  projectTypes: string[];
-  createdAt: string;
-  updatedAt: string;
+  tutor: string;
 };
+
+export interface FormValues {
+  selectedDays: Option[];
+  selectedDay: string;
+  selectedTime: string;
+  selectedSubject: string;
+  date: DateRange | undefined;
+}
+
+export interface ITeacher {
+  _id?: string;
+  name?: string;
+  email: string;
+  googleAccessToken?: string;
+  googleRefreshToken?: string;
+  googleid?: string;
+  phone?: string;
+  image?: string;
+  availability: IAvailability;
+  description?: string;
+}
+
+export interface IStudent {
+  id?: string;
+  name?: string;
+  email?: string;
+  role?: string;
+}

@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { Menu, X, LogOut, Home } from "lucide-react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { adminMenuItems, userMenuItems } from "@/Constants/Routes";
+import {
+  adminMenuItems,
+  teacherMenuItems,
+  userMenuItems,
+} from "@/Constants/Routes";
 
 export default function AdminDashboard({
   children,
@@ -17,7 +21,7 @@ export default function AdminDashboard({
   };
 
   const menuItems: { icon: React.ReactNode; label: string; path: string }[] =
-    adminMenuItems;
+    teacherMenuItems;
   // const { data: session } = useSession();
   // if (session?.user?.role === "admin") {
   //   menuItems = adminMenuItems;
@@ -61,7 +65,7 @@ export default function AdminDashboard({
           <div>
             <div className="mb-8 pt-4 lg:pt-0">
               <h2
-                style={{ color: "#fee5b5" }}
+                style={{ color: "#E8F6F3" }}
                 className="text-xl font-bold mb-4 pb-2 text-center"
               >
                 Dashboard
@@ -73,7 +77,7 @@ export default function AdminDashboard({
                   <li key={index}>
                     <Link
                       href={item.path}
-                      style={{ color: "#fee5b5" }}
+                      style={{ color: "#E8F6F3" }}
                       className="flex items-center space-x-3 p-2 rounded hover:opacity-80 transition-colors"
                       onClick={() => setIsSidebarOpen(false)}
                     >
@@ -86,13 +90,13 @@ export default function AdminDashboard({
             </nav>
           </div>
           <div className="space-y-5">
-            <button style={{ color: "#fee5b5" }}>
+            <button style={{ color: "#E8F6F3" }}>
               <Link href="/" className="flex items-center gap-2">
                 <Home /> Home
               </Link>
             </button>
             <button
-              style={{ color: "#fee5b5" }}
+              style={{ color: "#E8F6F3" }}
               className="flex items-center gap-2"
               onClick={() => signOut()}
             >
@@ -111,7 +115,7 @@ export default function AdminDashboard({
               Welcome Back, {"session?.user?.name"}
             </h1>
             <button
-              style={{ backgroundColor: "#136E61", color: "#131f22" }}
+              style={{ backgroundColor: "#136E61", color: "#E8F6F3" }}
               className="px-4 py-2 rounded font-medium hover:opacity-90 transition-opacity ml-12 lg:ml-0"
             >
               Profile

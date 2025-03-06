@@ -1,10 +1,14 @@
+import Stack from "@/components/Stack";
 import {
   BarChart,
   Briefcase,
+  CalendarDays,
   Code,
+  CreditCard,
   Github,
   MessageSquare,
   Newspaper,
+  PlusCircle,
   Settings,
   User2,
 } from "lucide-react";
@@ -68,6 +72,44 @@ export const userMenuItems = [
     icon: <Settings className="w-5 h-5" />,
     label: "Settings",
     path: "/dashboard/user/settings",
+  },
+];
+
+export const teacherMenuItems = [
+  {
+    icon: <BarChart className="w-5 h-5" />,
+    label: "Dashboard",
+    path: "/dashboard/teacher/profile",
+  },
+  {
+    icon: <PlusCircle className="w-5 h-5" />,
+    label: "Create New Course",
+    path: "/dashboard/teacher/create-course",
+  },
+  {
+    icon: <Stack width="24" height="24" />,
+    label: "My Courses",
+    path: "/dashboard/teacher/courses",
+  },
+  {
+    icon: <CreditCard className="w-5 h-5" />,
+    label: "Earning",
+    path: "/dashboard/teacher/earning",
+  },
+  {
+    icon: <CreditCard className="w-5 h-5" />,
+    label: "Messages",
+    path: "/dashboard/teacher/messages",
+  },
+  {
+    icon: <CalendarDays className="w-5 h-5" />,
+    label: "Availability",
+    path: "/dashboard/teacher/availability",
+  },
+  {
+    icon: <Settings className="w-5 h-5" />,
+    label: "Settings",
+    path: "/dashboard/teacher/settings",
   },
 ];
 

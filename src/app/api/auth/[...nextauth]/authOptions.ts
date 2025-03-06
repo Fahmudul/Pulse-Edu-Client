@@ -4,17 +4,22 @@ import GithubProvider from "next-auth/providers/github";
 
 const authOptions: NextAuthOptions = {
   providers: [
- 
     GoogleProvider({
       profile(profile) {
-        return { ...profile, id: profile.sub, role: "user" };
+        return { ...profile, id: profile.sub, role: "teacher" };
       },
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      authorization: {
+        params: {
+          scope:
+            "https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.events.readonly openid email profile",
+        },
+      },
     }),
     GithubProvider({
       profile(profile) {
-        return { ...profile, id: profile.id, role: "user" };
+        return { ...profile, id: profile.id, role: "teacher" };
       },
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
@@ -24,10 +29,14 @@ const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
+      console.log("account details", account);
       const OuthData = {
         email: user?.email,
         name: user?.name,
+        provider: account?.provider,
+        googleAccessToken: account?.access_token,
+        
       };
 
       const res = await fetch(
@@ -40,16 +49,18 @@ const authOptions: NextAuthOptions = {
           body: JSON.stringify(OuthData),
         }
       );
-      if (res.ok) {
+      if (res.ok && account?.provider === "google") {
         return true;
       }
       return true;
     },
-    async jwt({ user, token }) {
+    async jwt({ user, token, account }) {
       if (user) {
         token.name = user.name;
         token.email = user.email;
         token.role = user.role;
+        token.accessToken = account?.access_token;
+        token.refreshToken = account?.refresh_token;
       }
 
       return token;
@@ -60,6 +71,7 @@ const authOptions: NextAuthOptions = {
         session.user.name = token.name;
         session.user.email = token.email;
         session.user.role = token.role;
+        session.accessToken = token.accessToken;
       }
       return session;
     },

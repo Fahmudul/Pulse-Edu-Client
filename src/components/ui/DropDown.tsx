@@ -23,13 +23,13 @@ export function DropdownMenuDemo({ role }: { role: string }) {
           <User className="text-primary" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-10">
-        <DropdownMenuItem className="hover:text-primary hover:bg-[#fee5b5]">
+      <DropdownMenuContent className="w-10 bg-white">
+        <DropdownMenuItem className="hover:text-primary hover:bg-[#e8f6f3]">
           <Link href={`${redirectUrl}`}>Dashboard</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          className="hover:text-primary hover:bg-[#fee5b5]"
+          className="hover:text-primary hover:bg-[#e8f6f3]"
           onClick={() => {
             handleLogout();
             router.push("/login");

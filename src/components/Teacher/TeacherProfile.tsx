@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-
 import { CirclePlay, Star, Users } from "lucide-react";
 import User from "../../../public/assets/User.jpg";
 import { TbWorld } from "react-icons/tb";
@@ -10,7 +9,24 @@ import { CiInstagram, CiTwitter, CiYoutube } from "react-icons/ci";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import TeacherSubjectCard from "./TeacherSubjectCard";
-const TeacherProfile = () => {
+import OverView from "./OverView";
+import { getTeacherDetails } from "@/Services/Teacher";
+import { ButtonLink } from "../ui/link";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "../ui/button";
+import BookingModal from "@/Services/Booking/BookingModal";
+
+const TeacherProfile = async ({ id }: { id: string }) => {
+  const { data } = await getTeacherDetails(id);
+  // console.log("from overview", data);
+
   return (
     <div>
       <main className="p-4 flex flex-col  lg:p-6 w-[80%]  z-50 mx-auto  bg-primaryPro my-16 rounded-lg shadow-lg">
@@ -52,7 +68,7 @@ const TeacherProfile = () => {
             </div>
           </div>
           <div>
-            <div className="flex flex-col items-end">
+            <div className="flex flex-col items-end gap-2">
               <span className="flex items-center text-[#564FFD] font-semibold">
                 <TbWorld className="w-6 h-6 " />
                 <p>https://www.vakoshvili.com</p>
@@ -74,6 +90,17 @@ const TeacherProfile = () => {
                   <FaWhatsapp className="text-4xl text-[#4E5566]" />
                 </Link>
               </div>
+              {/* <ButtonLink className="mt-3" href={`/book-session?id=${1}`}>
+                Book a session
+              </ButtonLink> */}
+              <Dialog>
+                <DialogTrigger className="bg-primary py-2 focus:scale-95 transition-all duration-300 px-3 rounded-lg text-primaryPro">
+                  Book a session
+                </DialogTrigger>
+                <DialogContent className="w-full">
+                  <BookingModal />
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>
@@ -113,12 +140,16 @@ const TeacherProfile = () => {
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="tab1" className="p-3">
-                <p className="text-2xl font-bold text-[#333333]">Subjects I take</p>
+                <p className="text-2xl font-bold text-[#333333]">
+                  Subjects I take
+                </p>
                 <div className="mt-5">
                   <TeacherSubjectCard />
                 </div>
               </TabsContent>
-              <TabsContent value="tab2"></TabsContent>
+              <TabsContent value="tab2">
+                <OverView availability={data?.availability} />
+              </TabsContent>
             </Tabs>
           </div>
         </div>

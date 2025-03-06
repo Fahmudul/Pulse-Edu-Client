@@ -1,13 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { IoCloudDownloadOutline } from "react-icons/io5";
-import Socials from "@/components/Socials";
-import ProfileImage from "@/components/ProfileImage";
-import Stats from "@/components/Stats";
-import Link from "next/link";
-import Work from "@/components/Work";
-import Resume from "@/components/Resume";
-import Contact from "@/components/Contact";
 import Banner from "@/components/Home/Banner";
 import PrimaryContainer from "@/components/Shared/PrimaryContainer";
 import { FaAirbnb, FaAmazon } from "react-icons/fa";
