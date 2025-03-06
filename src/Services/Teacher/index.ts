@@ -62,7 +62,7 @@ export const getTeacherAvailability = async () => {
       `${backendUrl}/teacher/get-teacher-availability/${email}`
     );
     const result = await res.json();
-    console.log("land le", result);
+    // console.log("land le", result);
     return result;
   } catch (error) {
     console.log("error", error);

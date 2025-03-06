@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { getTeacherAvailability } from "@/Services/Teacher";
+import { getTeacherAvailability, getTeacherDetails } from "@/Services/Teacher";
 import { getAllSubject } from "@/Services/Subject";
 import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
 import { Calendar } from "@/components/ui/calendar";
@@ -28,6 +28,7 @@ import { calculateHours } from "@/Utils/calculateHours";
 import {
   FormValues,
   IAvailability,
+  IBooking,
   IBookingData,
   ISchedule,
   Subject,
@@ -36,6 +37,8 @@ import { useParams } from "next/navigation";
 import { useAppSelector } from "@/Redux/hooks";
 import { convertEventDate } from "@/Utils/convertEventDate";
 import { BookingData, bookingSchema } from "@/ZodSchema";
+import { createBookingRequest } from "@/Services/Booking";
+import { toast } from "sonner";
 const BookingModal = () => {
   const params = useParams();
   const {
@@ -81,19 +84,20 @@ const BookingModal = () => {
     const fetchData = async () => {
       try {
         const [availability, allSubject] = await Promise.all([
-          getTeacherAvailability(),
+          getTeacherDetails(params.id as string),
           getAllSubject(),
         ]);
-        // console.log(allSubject);
+        // console.log(availability?.data?.availability);
         if (availability?.data) {
-          setAvailabilitySchedule(availability.data);
+          setAvailabilitySchedule(availability.data.availability);
 
           // Prepare available days
-          const newAvailableDays = Object.keys(availability.data)
+          const newAvailableDays = Object.keys(availability?.data?.availability)
             .filter(
               (day) =>
-                availability.data[day as keyof typeof availability.data]
-                  ?.length > 0
+                availability.data.availability[
+                  day as keyof typeof availability.data.availability
+                ]?.length > 0
             )
             .map((day) => ({
               label: day.charAt(0).toUpperCase() + day.slice(1),
@@ -148,7 +152,7 @@ const BookingModal = () => {
   }, [selectedDays, selectedTime, selectedSubject, dateRange]);
   //console.log(bookingData);
   // Submission
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     // console.log("form data", data);
     const startDate = convertEventDate(data?.date?.from as Date);
     const endDate = convertEventDate(data?.date?.to as Date);
@@ -157,7 +161,10 @@ const BookingModal = () => {
     //console.log(startDate, " ", endDate);
     const recurrenceDate =
       endDate.split("-").join("") + endTime.split(":").join("");
-    //console.log("reuvvv", recurrenceDate);
+    const byDayString = Object.keys(bookingData?.schedule!)
+      .map((day) => day.slice(0, 2).toUpperCase())
+      .join(",");
+    // console.log("byDayString", byDayString);
     const googleEventModifiedData = {
       summary: `Session with ${studentName}`,
       description: `${data?.selectedSubject.split("-")[1]} session`,
@@ -169,7 +176,10 @@ const BookingModal = () => {
         dateTime: `${startDate}T${endTime}:00+06:00`,
         timeZone: "Asia/Dhaka",
       },
-      recurrence: [`RRULE:FREQ=WEEKLY;UNTIL=${recurrenceDate}00Z`],
+      recurrence: [
+        `RRULE:FREQ=WEEKLY;BYDAY=${byDayString};UNTIL=${recurrenceDate}00Z`,
+      ],
+      attendees: [{ email: studentEmail }],
     };
     const modifiedData = {
       ...bookingData,
@@ -178,7 +188,14 @@ const BookingModal = () => {
       event: googleEventModifiedData,
     };
     delete modifiedData.schedule;
-    console.log("Booking data:", modifiedData);
+    const toastId = toast.loading("Sending booking request...");
+    // console.log("Booking data:", modifiedData);
+    const response = await createBookingRequest(modifiedData as IBooking);
+    if (response.success) {
+      toast.success(response.message, { id: toastId });
+    } else {
+      toast.error(response?.message, { id: toastId });
+    }
   };
   // console.log(selectedSubject);
   return (
@@ -210,22 +227,24 @@ const BookingModal = () => {
                       {field.value.map((val) => val.label).join(", ")}
                     </div>
                     <FormControl>
-                      <MultipleSelector
-                        key={availableDays.length}
-                        value={field.value}
-                        onChange={(value) => {
-                          setValue("selectedDays", value);
-                        }}
-                        defaultOptions={availableDays}
-                        disabled={!availableDays.length}
-                        placeholder="Select days ..."
-                        emptyIndicator={
-                          <p className="text-center text-gray-600 dark:text-gray-400 py-2 ">
-                            No results found
-                          </p>
-                        }
-                        className="bg-white  dark:bg-primaryPro "
-                      />
+                      <div className="bg-white ">
+                        <MultipleSelector
+                          key={availableDays.length}
+                          value={field.value}
+                          onChange={(value) => {
+                            setValue("selectedDays", value);
+                          }}
+                          defaultOptions={availableDays}
+                          disabled={!availableDays.length}
+                          placeholder="Select days ..."
+                          emptyIndicator={
+                            <p className="text-center text-gray-600 dark:text-gray-400 py-2 ">
+                              No results found
+                            </p>
+                          }
+                          className="bg-white "
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage className="text-xs text-red-500">
                       {errors?.selectedDays?.message}

@@ -14,25 +14,25 @@ const Stack = ({ height, width }: { height: string; width: string }) => {
           id="Vector"
           d="M3 16.5L12 21.75L21 16.5"
           stroke="#fff"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           id="Vector_2"
           d="M3 12L12 17.25L21 12"
           stroke="#fff"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           id="Vector_3"
           d="M3 7.5L12 12.75L21 7.5L12 2.25L3 7.5Z"
           stroke="#fff"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

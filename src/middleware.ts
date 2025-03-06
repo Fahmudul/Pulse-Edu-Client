@@ -20,37 +20,36 @@ export async function middleware(request: NextRequest) {
     user = await getUser();
   }
   const isPublicRoute = route === "/login" || route === "/register";
+  if (!user && !isPublicRoute) {
+    console.log("hitting 1");
 
-  // if (!user && !isPublicRoute) {
-  //   console.log("hitting 1");
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+  if (isPublicRoute && user) {
+    const redirectRoute =
+      user && user?.role === "admin"
+        ? "/dashboard/admin/analytics"
+        : user?.role === "teacher"
+        ? "/dashboard/teacher/profile"
+        : `/dashboard/${user?.role}/student`;
 
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
-  // if (isPublicRoute && user) {
-  //   const redirectRoute =
-  //     user && user?.role === "admin"
-  //       ? "/dashboard/admin/analytics"
-  //       : user?.role === "teacher"
-  //       ? "/dashboard/teacher/profile"
-  //       : `/dashboard/${user?.role}/student`;
-
-  //   return NextResponse.redirect(new URL(redirectRoute, request.url));
-  // }
-  // if (
-  //   user &&
-  //   ((user?.role === "admin" && !route.startsWith("/dashboard/admin")) ||
-  //     (user?.role === "student" && !route.startsWith("/dashboard/student")) ||
-  //     (user?.role === "teacher" && !route.startsWith("/dashboard/teacher")))
-  // ) {
-  //   console.log("hitting 3");
-  //   const redirectRoute =
-  //     user?.role === "admin"
-  //       ? "/dashboard/admin/analytics"
-  //       : user?.role === "teacher"
-  //       ? "/dashboard/teacher/profile"
-  //       : `/dashboard/${user?.role}/profile`;
-  //   return NextResponse.redirect(new URL(redirectRoute, request.url));
-  // }
+    return NextResponse.redirect(new URL(redirectRoute, request.url));
+  }
+  if (
+    user &&
+    ((user?.role === "admin" && !route.startsWith("/dashboard/admin")) ||
+      (user?.role === "student" && !route.startsWith("/dashboard/student")) ||
+      (user?.role === "teacher" && !route.startsWith("/dashboard/teacher")))
+  ) {
+    console.log("hitting 3");
+    const redirectRoute =
+      user?.role === "admin"
+        ? "/dashboard/admin/analytics"
+        : user?.role === "teacher"
+        ? "/dashboard/teacher/profile"
+        : `/dashboard/${user?.role}/profile`;
+    return NextResponse.redirect(new URL(redirectRoute, request.url));
+  }
 }
 
 // See "Matching Paths" below to learn more

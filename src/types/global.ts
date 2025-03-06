@@ -119,3 +119,26 @@ export interface IStudent {
   email?: string;
   role?: string;
 }
+
+export interface ISessionDetails {
+  summary: string;
+  description: string;
+  start: {
+    dateTime: string;
+    timeZone: string;
+  };
+  end: {
+    dateTime: string;
+    timeZone: string;
+  };
+  recurrence: string[];
+  attendees: { email: string }[];
+}
+export interface IBooking {
+  student: string;
+  teacher: string;
+  status: string;
+  event: ISessionDetails;
+  subject: string;
+  duration: number;
+}

@@ -21,8 +21,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "../ui/button";
-import BookingModal from "@/Services/Booking/BookingModal";
-
+import BookingModal from "@/components/Booking/BookingModal";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 const TeacherProfile = async ({ id }: { id: string }) => {
   const { data } = await getTeacherDetails(id);
   // console.log("from overview", data);
@@ -90,14 +90,14 @@ const TeacherProfile = async ({ id }: { id: string }) => {
                   <FaWhatsapp className="text-4xl text-[#4E5566]" />
                 </Link>
               </div>
-              {/* <ButtonLink className="mt-3" href={`/book-session?id=${1}`}>
-                Book a session
-              </ButtonLink> */}
               <Dialog>
                 <DialogTrigger className="bg-primary py-2 focus:scale-95 transition-all duration-300 px-3 rounded-lg text-primaryPro">
                   Book a session
                 </DialogTrigger>
                 <DialogContent className="w-full">
+                  <VisuallyHidden asChild>
+                    <DialogTitle />
+                  </VisuallyHidden>
                   <BookingModal />
                 </DialogContent>
               </Dialog>

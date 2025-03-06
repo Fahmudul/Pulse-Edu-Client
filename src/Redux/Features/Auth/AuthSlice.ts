@@ -1,3 +1,4 @@
+import { RootState } from "@/Redux/store";
 import { IStudent } from "@/types/global";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 const initialState: IStudent = {};
@@ -16,6 +17,8 @@ const authSlice = createSlice({
     },
   },
 });
+
+export const retrievUuser = (state: RootState) => state.auth;
 
 export const { setUser, removeUser } = authSlice.actions;
 export default authSlice.reducer;
