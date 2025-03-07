@@ -160,7 +160,7 @@ const BookingModal = () => {
     //console.log(startTime, endTime);
     //console.log(startDate, " ", endDate);
     const recurrenceDate =
-      endDate.split("-").join("") + endTime.split(":").join("");
+      endDate.split("-").join("") + "T" + endTime.split(":").join("");
     const byDayString = Object.keys(bookingData?.schedule!)
       .map((day) => day.slice(0, 2).toUpperCase())
       .join(",");
@@ -187,7 +187,7 @@ const BookingModal = () => {
       student: studentId,
       event: googleEventModifiedData,
     };
-    delete modifiedData.schedule;
+    // delete modifiedData.schedule;
     const toastId = toast.loading("Sending booking request...");
     // console.log("Booking data:", modifiedData);
     const response = await createBookingRequest(modifiedData as IBooking);

@@ -18,8 +18,8 @@ const page = async () => {
 
           {Array(7)
             .fill(0)
-            .map((item) => (
-              <TeacherCard hideButton={true} />
+            .map((item,idx) => (
+              <TeacherCard hideButton={true} key={idx}/>
             ))}
         </div>
       </div>

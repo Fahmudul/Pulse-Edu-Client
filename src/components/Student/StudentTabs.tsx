@@ -3,7 +3,7 @@ export const StudentTabs = [
   "Subjects",
   "Teachers",
   "Message",
-  "Wishlist",
+  "Session Payment",
   "Purchase History",
   "Settings",
 ];

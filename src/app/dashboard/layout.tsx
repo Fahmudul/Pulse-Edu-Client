@@ -22,7 +22,8 @@ export default function AdminDashboard({
 
   const menuItems: { icon: React.ReactNode; label: string; path: string }[] =
     teacherMenuItems;
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
+  console.log("sesion", session);
   // if (session?.user?.role === "admin") {
   //   menuItems = adminMenuItems;
   // } else if (session?.user?.role === "user") {
@@ -112,7 +113,7 @@ export default function AdminDashboard({
               style={{ color: "#093B3B" }}
               className="text-xl font-bold hidden lg:block"
             >
-              Welcome Back, {"session?.user?.name"}
+              Welcome Back, {session?.user?.name}
             </h1>
             <button
               style={{ backgroundColor: "#136E61", color: "#E8F6F3" }}

@@ -10,7 +10,11 @@ import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import TeacherSubjectCard from "./TeacherSubjectCard";
 import OverView from "./OverView";
-import { getTeacherDetails } from "@/Services/Teacher";
+import {
+  getMeTeacher,
+  getSingleTeacherDetails,
+  getTeacherDetails,
+} from "@/Services/Teacher";
 import { ButtonLink } from "../ui/link";
 import {
   Dialog,
@@ -25,8 +29,9 @@ import BookingModal from "@/components/Booking/BookingModal";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 const TeacherProfile = async ({ id }: { id: string }) => {
   const { data } = await getTeacherDetails(id);
-  // console.log("from overview", data);
-
+  const { data: teacherData } = await getSingleTeacherDetails(id);
+  console.log("from service", teacherData);
+  const { name } = teacherData;
   return (
     <div>
       <main className="p-4 flex flex-col  lg:p-6 w-[80%]  z-50 mx-auto  bg-primaryPro my-16 rounded-lg shadow-lg">
@@ -38,7 +43,7 @@ const TeacherProfile = async ({ id }: { id: string }) => {
               className="w-[120px] h-[120px] rounded-full"
             />
             <div className="flex flex-col gap-4">
-              <p className="text-2xl font-bold text-primary">{"Hallo Check"}</p>
+              <span className="text-2xl font-bold text-primary">{name} <p></p> </span>
               <p className="text-primary font-semibold">
                 Web Designer & Developer
               </p>

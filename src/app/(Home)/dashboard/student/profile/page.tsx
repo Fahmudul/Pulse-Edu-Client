@@ -25,6 +25,8 @@ import {
 } from "@/components/ui/select";
 import TeacherCard from "@/components/Teacher/TeacherCard";
 import Loader from "@/components/Loader/Loader";
+import Payment from "@/components/Student/Payment";
+import PaymentComponent from "@/components/Payment/PaymentDetails";
 const UserProfile = () => {
   const { user } = useUser();
   return (
@@ -237,8 +239,10 @@ const UserProfile = () => {
             <TabsContent value="message">
               Change your password here.
             </TabsContent>
-            <TabsContent value="wishlist">
-              Change your password here.
+            <TabsContent value="session payment" >
+              <div className="mt-5 w-full bg-white rounded-lg py-6 h-full ">
+                <PaymentComponent />
+              </div>
             </TabsContent>
             <TabsContent value="purchase history">
               Change your password here.

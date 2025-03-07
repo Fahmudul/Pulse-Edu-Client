@@ -11,6 +11,7 @@ import {
   PlusCircle,
   Settings,
   User2,
+  UserPlus,
 } from "lucide-react";
 
 export const adminMenuItems = [
@@ -105,6 +106,11 @@ export const teacherMenuItems = [
     icon: <CalendarDays className="w-5 h-5" />,
     label: "Availability",
     path: "/dashboard/teacher/availability",
+  },
+  {
+    icon: <UserPlus className="w-5 h-5" />,
+    label: "Bookings",
+    path: "/dashboard/teacher/bookings",
   },
   {
     icon: <Settings className="w-5 h-5" />,

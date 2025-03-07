@@ -2,6 +2,7 @@
 import UserProvider from "@/Context/UserContext";
 import { AppStore, makeStore } from "@/Redux/store";
 import Loader from "@/components/Loader/Loader";
+import { SessionProvider } from "next-auth/react";
 
 import React, { useRef } from "react";
 import { Provider } from "react-redux";
@@ -22,7 +23,7 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
     <UserProvider>
       <Provider store={storeRef.current}>
         <PersistGate loading={<Loader />} persistor={persistorRef.current}>
-          {children}
+          <SessionProvider>{children}</SessionProvider>
         </PersistGate>
       </Provider>
       ;

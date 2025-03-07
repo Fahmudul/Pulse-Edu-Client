@@ -36,7 +36,6 @@ const authOptions: NextAuthOptions = {
         name: user?.name,
         provider: account?.provider,
         googleAccessToken: account?.access_token,
-        
       };
 
       const res = await fetch(
@@ -49,14 +48,19 @@ const authOptions: NextAuthOptions = {
           body: JSON.stringify(OuthData),
         }
       );
+      const response = await res.json();
+      console.log("from google login", response);
       if (res.ok && account?.provider === "google") {
+        user.id = response?.data?._id;
         return true;
       }
       return true;
     },
     async jwt({ user, token, account }) {
       if (user) {
+        console.log("google user 61", user);
         token.name = user.name;
+        token.id = user.id;
         token.email = user.email;
         token.role = user.role;
         token.accessToken = account?.access_token;
@@ -69,6 +73,7 @@ const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (token && session.user) {
         session.user.name = token.name;
+        session.user.id = token.id;
         session.user.email = token.email;
         session.user.role = token.role;
         session.accessToken = token.accessToken;

@@ -142,3 +142,38 @@ export interface IBooking {
   subject: string;
   duration: number;
 }
+
+export interface PaymentProps {
+  subject?: {
+    name?: string;
+    imageUrl?: string;
+  };
+  schedule?: {
+    day?: string;
+    startTime?: string;
+    endTime?: string;
+  }[];
+  teacher?: string;
+  duration?: {
+    startDate?: string;
+    endDate?: string;
+  };
+  price?: number;
+  totalSessions?: number;
+  status?: "pending" | "confirmed" | "cancelled";
+  payBtn?: boolean;
+  bookingId?: string;
+}
+
+export interface IPaymentPayload {
+  paymentId?: string;
+  student?: string;
+  price?: number;
+  courseName?: string;
+  teacher?: string;
+  status?: string;
+  currency?: string;
+  bookingId?: string;
+  method?: string;
+  studentName?: string;
+}
