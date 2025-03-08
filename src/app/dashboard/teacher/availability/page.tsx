@@ -34,8 +34,15 @@ const EventComponent = ({ event }: { event: any }) => {
     </TooltipProvider>
   );
 };
+export interface IEvent {
+  title: string;
+  description: string;
+  start: Date;
+  end: Date;
+}
 const TeacherAvailabilityPage = () => {
-  const [currentView, setCurrentView] = useState<View>(Views.WEEK);
+  const [events, setEvents] = useState<IEvent[]>([]);
+  const [currentView, setCurrentView] = useState<View>(Views.MONTH);
   const [currentDate, setCurrentDate] = useState(new Date());
   const handleViewChange = (newView: View) => {
     setCurrentView(newView as View);
@@ -45,37 +52,18 @@ const TeacherAvailabilityPage = () => {
     setCurrentDate(newDate);
   };
   const { data: session } = useSession();
-  const [data, setData] = React.useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const response = await getTeacherCalendarSchedule(session?.user.id);
-      console.log(response);
-      // setData(response);
+      console.log(response.data);
+      setEvents(response?.data);
     };
     if (session?.user.id) {
       fetchData();
     }
   }, [session?.user.id]);
   const localizer = momentLocalizer(moment);
-  const myEventsList = [
-    {
-      start: "9:00", // 9:00 AM
-      end: new Date(2025, 2, 4, 10, 0), // 10:00 AM
-      title: "Available Slot",
-    },
-    {
-      start: new Date(2025, 2, 4, 11, 0), // 11:00 AM
-      end: new Date(2025, 2, 4, 12, 0), // 12:00 PM
-      title: "Available Slot",
-    },
-    {
-      start: new Date(2025, 2, 5, 10, 0), // 10:00 AM
-      end: new Date(2025, 2, 5, 11, 0), // 11:00 AM
-      title: "meeetingggg",
-      description: "Meeting with client",
-    },
-  ];
-  console.log("from overview", data);
+
   return (
     <div className="p-6 bg-[#E8F6F3]/10 rounded-xl">
       <style>{calendarStyles}</style>
@@ -104,7 +92,7 @@ const TeacherAvailabilityPage = () => {
       <div className="bg-white rounded-xl overflow-hidden shadow-xl">
         <Calendar
           localizer={localizer}
-          events={myEventsList}
+          events={events}
           startAccessor="start"
           endAccessor="end"
           showMultiDayTimes
@@ -116,8 +104,9 @@ const TeacherAvailabilityPage = () => {
           tooltipAccessor={null}
           toolbar={true}
           date={currentDate}
+          // defaultView={Views.MONTH}
           views={[Views.MONTH, Views.WEEK, Views.DAY, Views.AGENDA]}
-          // defaultView={Views.WEEK}
+          defaultView={Views.MONTH}
           components={{
             event: EventComponent,
             toolbar: CustomToolbar,

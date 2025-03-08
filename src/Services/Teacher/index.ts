@@ -18,6 +18,7 @@ export const getTeacherDetails = async (id?: string) => {
 export const getTeacherCalendarSchedule = async (id?: string) => {
   try {
     const res = await fetch(`${backendUrl}/teacher/get-teacher-calendar/${id}`);
+    return await res.json()
   } catch (error) {
     console.log("error", error);
     throw new Error("Failed to get teacher availability");
