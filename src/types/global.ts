@@ -177,3 +177,31 @@ export interface IPaymentPayload {
   method?: string;
   studentName?: string;
 }
+
+interface Availability {
+  startTime: string;
+  endTime: string;
+  isBooked: boolean;
+}
+
+export interface ITutor {
+  canAccess: boolean;
+  _id: string;
+  name: string;
+  email: string;
+  __v: number;
+  availability: {
+    sunday: Availability[];
+    monday: Availability[];
+    tuesday: Availability[];
+    wednesday: Availability[];
+    thursday: Availability[];
+    friday: Availability[];
+    saturday: Availability[];
+  };
+  hourlyRate: number;
+  image: string;
+  description: string;
+  rating: number;
+  available: boolean;
+}

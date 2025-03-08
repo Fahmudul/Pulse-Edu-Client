@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { CirclePlay, Star, Users } from "lucide-react";
+import { CirclePlay, DollarSign, Star, Users, X } from "lucide-react";
 import User from "../../../public/assets/User.jpg";
 import { TbWorld } from "react-icons/tb";
 import Link from "next/link";
@@ -18,6 +18,7 @@ import {
 import { ButtonLink } from "../ui/link";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -43,7 +44,9 @@ const TeacherProfile = async ({ id }: { id: string }) => {
               className="w-[120px] h-[120px] rounded-full"
             />
             <div className="flex flex-col gap-4">
-              <span className="text-2xl font-bold text-primary">{name} <p></p> </span>
+              <span className="text-2xl font-bold text-primary">
+                {name} <p></p>{" "}
+              </span>
               <p className="text-primary font-semibold">
                 Web Designer & Developer
               </p>
@@ -51,7 +54,7 @@ const TeacherProfile = async ({ id }: { id: string }) => {
                 <span className="flex justify-between gap-2 items-center">
                   <span className="flex items-center gap-2 font-bold">
                     <Star className="w-6 h-6 text-[#FD8E1F] fill-[#FD8E1F]" />
-                    4.8
+                    {teacherData?.rating}.0
                   </span>
                   <p>(134,633 review)</p>
                 </span>
@@ -64,10 +67,9 @@ const TeacherProfile = async ({ id }: { id: string }) => {
                 </span>
                 <span className="flex justify-between gap-2 items-center">
                   <span className="flex items-center gap-2 font-bold">
-                    <CirclePlay className="w-6 h-6 text-[#fff] fill-[#FF6636]" />
-                    4.8
+                    <DollarSign className="w-6 h-6 text-primary " />
+                    {teacherData?.hourlyRate} /hr
                   </span>
-                  <p>(134,633 review)</p>
                 </span>
               </div>
             </div>
@@ -96,10 +98,20 @@ const TeacherProfile = async ({ id }: { id: string }) => {
                 </Link>
               </div>
               <Dialog>
-                <DialogTrigger className="bg-primary py-2 focus:scale-95 transition-all duration-300 px-3 rounded-lg text-primaryPro">
+                <DialogTrigger
+                  disabled={!teacherData?.canAccess}
+                  className={`${
+                    !teacherData?.canAccess
+                      ? "cursor-not-allowed"
+                      : "cursor-pointer"
+                  } bg-primary py-2 focus:scale-95 transition-all duration-300 px-3 rounded-lg text-primaryPro`}
+                >
                   Book a session
                 </DialogTrigger>
                 <DialogContent className="w-full">
+                  <DialogClose className=" absolute right-[30.6%] top-[7%] inline-flex items-center justify-center rounded-full w-9 h-9">
+                    <X className="w-6 h-6 text-primary" />
+                  </DialogClose>
                   <VisuallyHidden asChild>
                     <DialogTitle />
                   </VisuallyHidden>
@@ -113,29 +125,16 @@ const TeacherProfile = async ({ id }: { id: string }) => {
           <div className="p-4 bg-white rounded-lg  shadow-lg">
             <p className="text-lg font-bold mb-3">About Me</p>
             <div>
-              <p className="text-sm">
-                One day Vako had enough with the 9-to-5 grind, or more like
-                9-to-9 in his case, and quit his job, or more like got himself
-                fired from his own startup.
-                <br />
-                <br />
-                He decided to work on his dream: be his own boss, travel the
-                world, only do the work he enjoyed, and make a lot more money in
-                the process. No more begging for vacation days and living from
-                paycheck to paycheck. After trying everything from e-commerce
-                stores to professional poker his lucky break came when he
-                started freelance design. Vako fell in love with the field that
-                gives him the lifestyle of his dreams.
-                <br />
-                <br /> Vako realizes that people who take courses on Udemy want
-                to transform their lives. Today with his courses and mentoring
-                Vako is helping thousands of people transform their lives, just
-                like he did once.
-              </p>
+              <span className="text-sm text-primary">
+                <p className="font-bold text-lg inline">
+                  {teacherData?.description.slice(0, 6)}
+                </p>
+                {teacherData?.description.slice(6)}
+              </span>
             </div>
           </div>
           <div className="col-span-2 bg-white rounded-lg shadow-lg p-4 text-primary">
-            <Tabs defaultValue="tab1" className="w-full">
+            <Tabs defaultValue="tab1" className="w-full ">
               <TabsList>
                 <TabsTrigger value="tab1" className="text-base">
                   Subjects
@@ -152,7 +151,7 @@ const TeacherProfile = async ({ id }: { id: string }) => {
                   <TeacherSubjectCard />
                 </div>
               </TabsContent>
-              <TabsContent value="tab2">
+              <TabsContent value="tab2" className="p-3 flex">
                 <OverView availability={data?.availability} />
               </TabsContent>
             </Tabs>

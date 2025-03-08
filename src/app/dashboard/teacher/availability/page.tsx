@@ -15,11 +15,22 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TooltipContent } from "@radix-ui/react-tooltip";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import AddTeacherAvailabilityModal from "@/components/Teacher/AddAvailabilityModal";
+import { X } from "lucide-react";
 const EventComponent = ({ event }: { event: any }) => {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger className="bg-red-500 flex justify-center items-center w-full h-full rounded-lg">
+        <TooltipTrigger className="bg-primary  flex justify-center items-center w-full h-full rounded-lg">
           <span className="">
             <strong className="mb-2">{event.title}</strong>
             <br />
@@ -27,8 +38,8 @@ const EventComponent = ({ event }: { event: any }) => {
             {moment(event.end).format("hh:mm A")}
           </span>
         </TooltipTrigger>
-        <TooltipContent className="bg-black">
-          <p>{event.description}</p>
+        <TooltipContent className="bg-black rounded-lg">
+          <p className="px-2 py-1 ">{event.description}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -67,13 +78,30 @@ const TeacherAvailabilityPage = () => {
   return (
     <div className="p-6 bg-[#E8F6F3]/10 rounded-xl">
       <style>{calendarStyles}</style>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-[#093B3B]">
-          Teacher Availability
-        </h1>
-        <p className="text-gray-600">
-          View and manage your available time slots and meetings
-        </p>
+      <div className="mb-6 flex justify-between items-center py-4">
+        <div>
+          <h1 className="text-2xl font-bold text-[#093B3B]">
+            Teacher Availability
+          </h1>
+          <p className="text-gray-600">
+            View and manage your available time slots and meetings
+          </p>
+        </div>
+
+        <Dialog>
+          <DialogTrigger className="bg-primary py-2 focus:scale-95 transition-all duration-300 px-3 rounded-lg text-primaryPro">
+            Add Availability
+          </DialogTrigger>
+          <DialogContent className="w-full ">
+            <DialogClose className=" absolute right-[35.6%] top-8 inline-flex items-center justify-center rounded-full w-9 h-9">
+              <X className="w-6 h-6 text-primary" />
+            </DialogClose>
+            <VisuallyHidden asChild>
+              <DialogTitle />
+            </VisuallyHidden>
+            <AddTeacherAvailabilityModal />
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="flex items-center justify-between mb-4">

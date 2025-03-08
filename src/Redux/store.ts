@@ -10,6 +10,7 @@ import {
 } from "redux-persist";
 import authReducer from "./Features/Auth/AuthSlice";
 import storage from "./storage";
+import { baseApi } from "./api/baseApi";
 export const authPersistConfig = {
   key: "auth",
   storage,
@@ -19,13 +20,14 @@ export const makeStore = () => {
   return configureStore({
     reducer: {
       auth: persistedAuthReducer,
+      [baseApi.reducerPath]: baseApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }),
+      }).concat(baseApi.middleware),
   });
 };
 

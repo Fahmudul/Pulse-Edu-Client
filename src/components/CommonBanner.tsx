@@ -8,16 +8,16 @@ const CommonBanner = ({
   subTitle: string;
 }) => {
   return (
-    <div className="w-full bg-primaryPro pb-3 lg:pb-5 xl:pb-12">
-      <div className="rounded-xl w-[82.5%] mx-auto  h-[450px] border bg-primary flex justify-center items-center">
-        <span className="text-center space-y-4">
-          <p className="text-md font-semibold md:text-lg xl:text-2xl text-primaryPro">
+    <div className="w-full bg-primaryPro ">
+      <div className=" w-full mx-auto  h-[150px] border bg-[#F5F7FA] flex justify-center items-center">
+        <span className="text-center ">
+          <p className="text-lg mb-3 font-semibold md:text-xl xl:text-4xl text-primary">
+            {" "}
             {subTitle}
           </p>
-          <p className="text-lg font-semibold md:text-xl xl:text-5xl text-primaryPro">
-            {" "}
-            {title}
-          </p>
+          <span className=" text-md text-gray-500 font-semibold md:text-lg xl:text-xl ">
+            Home / <p className="inline text-primary">{title}</p>
+          </span>
         </span>
       </div>
     </div>

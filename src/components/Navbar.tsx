@@ -13,11 +13,11 @@ const NavItems = [
   },
   {
     name: "About Us",
-    path: "/work",
+    path: "/about-us",
   },
   {
-    name: "Courses",
-    path: "/courses",
+    name: "FAQ",
+    path: "/faq",
   },
 ];
 const Navbar = () => {

@@ -8,6 +8,7 @@ import {
   teacherMenuItems,
   userMenuItems,
 } from "@/Constants/Routes";
+import { useParams, usePathname } from "next/navigation";
 
 export default function AdminDashboard({
   children,
@@ -19,7 +20,8 @@ export default function AdminDashboard({
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
+  const location = usePathname()
+  console.log("location", location)
   const menuItems: { icon: React.ReactNode; label: string; path: string }[] =
     teacherMenuItems;
   const { data: session } = useSession();
@@ -44,7 +46,7 @@ export default function AdminDashboard({
         {isSidebarOpen ? (
           <X className="w-6 h-6" />
         ) : (
-          <Menu className="w-6 h-6" />
+          <Menu className="w-6 h-6 text-[#36a292]" />
         )}
       </button>
       {/* Overlay for mobile */}
@@ -58,7 +60,7 @@ export default function AdminDashboard({
       {/* Sidebar */}
       <div
         style={{ backgroundColor: "#136E61" }}
-        className={`fixed top-0 left-0 lg:static w-64 h-full z-[45px] transform transition-transform duration-300 ease-in-out ${
+        className={`fixed z-40 top-0 left-0 lg:static w-64 h-full transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -117,7 +119,7 @@ export default function AdminDashboard({
             </h1>
             <button
               style={{ backgroundColor: "#136E61", color: "#E8F6F3" }}
-              className="px-4 py-2 rounded font-medium hover:opacity-90 transition-opacity ml-12 lg:ml-0"
+              className={`${location === "/dashboard/teacher/availability" && "hidden"} px-4 py-2 rounded font-medium hover:opacity-90 transition-opacity ml-12 lg:ml-0`}
             >
               Profile
             </button>

@@ -6,8 +6,7 @@ import React from "react";
 const OverView = async ({ availability }: { availability: IAvailability }) => {
   console.log(availability);
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div></div>
+    <div className="w-1/2  ">
       <AvailabilitySchedule availability={availability} />
     </div>
   );
@@ -19,7 +18,7 @@ const AvailabilitySchedule = ({
   availability: IAvailability;
 }) => {
   return (
-    <div className="w-full mx-auto p-5 bg-white shadow-md rounded-lg border border-primary">
+    <div className="w-full mx-auto p-5  bg-gray-100 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-4 text-center">
         Weekly Schedule
       </h2>
@@ -32,7 +31,12 @@ const AvailabilitySchedule = ({
             {slots.length > 0 ? (
               <ul className="mt-2 space-y-1">
                 {slots.map((slot, index) => (
-                  <li key={index} className="text-gray-700">
+                  <li
+                    key={index}
+                    className={`text-gray-700 ${
+                      slot.isBooked ? "line-through" : ""
+                    }`}
+                  >
                     ⏰ {slot.startTime} - {slot.endTime}
                   </li>
                 ))}
