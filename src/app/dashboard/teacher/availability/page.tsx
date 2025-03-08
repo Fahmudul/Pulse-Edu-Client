@@ -1,35 +1,61 @@
 "use client";
-import React, { useEffect } from "react";
-import { Calendar, momentLocalizer, Views } from "react-big-calendar";
+import React, { useEffect, useState } from "react";
+import { Calendar, momentLocalizer, View, Views } from "react-big-calendar";
 import moment from "moment";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import { getTeacherDetails } from "@/Services/Teacher";
+import "../../../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
+import {
+  getTeacherCalendarSchedule,
+  getTeacherDetails,
+} from "@/Services/Teacher";
 import { calendarStyles } from "@/components/Teacher/Calendar.style";
+import { useSession } from "next-auth/react";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { TooltipContent } from "@radix-ui/react-tooltip";
 const EventComponent = ({ event }: { event: any }) => {
   return (
-    <div>
-      <strong>{event.title}</strong>
-      <br />
-      {moment(event.start).format("hh:mm A")} -{" "}
-      {moment(event.end).format("hh:mm A")}
-    </div>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger className="bg-red-500 flex justify-center items-center w-full h-full rounded-lg">
+          <span className="">
+            <strong className="mb-2">{event.title}</strong>
+            <br />
+            {moment(event.start).format("hh:mm A")} -{" "}
+            {moment(event.end).format("hh:mm A")}
+          </span>
+        </TooltipTrigger>
+        <TooltipContent className="bg-black">
+          <p>{event.description}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 const TeacherAvailabilityPage = () => {
-  // const [currentView, setCurrentView] = useState(Views.WEEK);
-  // const handleViewChange = (newView: string) => {
-  //   setCurrentView(newView);
-  // };
-  // const [data, setData] = React.useState([]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await getTeacherDetails();
+  const [currentView, setCurrentView] = useState<View>(Views.WEEK);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const handleViewChange = (newView: View) => {
+    setCurrentView(newView as View);
+  };
 
-  //     setData(response);
-  //   };
-  //   fetchData();
-  // }, []);
-  // console.log("from overview", data);
+  const handleNavigate = (newDate: Date) => {
+    setCurrentDate(newDate);
+  };
+  const { data: session } = useSession();
+  const [data, setData] = React.useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getTeacherCalendarSchedule(session?.user.id);
+      console.log(response);
+      // setData(response);
+    };
+    if (session?.user.id) {
+      fetchData();
+    }
+  }, [session?.user.id]);
   const localizer = momentLocalizer(moment);
   const myEventsList = [
     {
@@ -45,9 +71,11 @@ const TeacherAvailabilityPage = () => {
     {
       start: new Date(2025, 2, 5, 10, 0), // 10:00 AM
       end: new Date(2025, 2, 5, 11, 0), // 11:00 AM
-      title: "Booked Meeting",
+      title: "meeetingggg",
+      description: "Meeting with client",
     },
   ];
+  console.log("from overview", data);
   return (
     <div className="p-6 bg-[#E8F6F3]/10 rounded-xl">
       <style>{calendarStyles}</style>
@@ -81,14 +109,80 @@ const TeacherAvailabilityPage = () => {
           endAccessor="end"
           showMultiDayTimes
           style={{ height: 600 }}
-          // onView={handleViewChange}
+          view={currentView}
+          onView={handleViewChange}
+          onNavigate={handleNavigate}
+          titleAccessor={"title"}
+          tooltipAccessor={null}
+          toolbar={true}
+          date={currentDate}
           views={[Views.MONTH, Views.WEEK, Views.DAY, Views.AGENDA]}
           // defaultView={Views.WEEK}
           components={{
             event: EventComponent,
+            toolbar: CustomToolbar,
           }}
         />
       </div>
+    </div>
+  );
+};
+
+const CustomToolbar = ({ label, onNavigate, onView }: any) => {
+  return (
+    <div className="rbc-toolbar flex justify-between items-center p-2 bg-gray-100 rounded-md">
+      {/* Navigation Buttons */}
+      <span className="rbc-btn-group">
+        <button
+          onClick={() => onNavigate("PREV")}
+          className="px-3 py-1 bg-blue-500 text-white rounded-md"
+        >
+          ⬅️ Prev
+        </button>
+        <button
+          onClick={() => onNavigate("TODAY")}
+          className="px-3 py-1 bg-green-500 text-white rounded-md"
+        >
+          📍 Today
+        </button>
+        <button
+          onClick={() => onNavigate("NEXT")}
+          className="px-3 py-1 bg-blue-500 text-white rounded-md"
+        >
+          Next ➡️
+        </button>
+      </span>
+
+      {/* Label (Current Date Display) */}
+      <span className="rbc-toolbar-label font-bold">{label}</span>
+
+      {/* View Selection Buttons */}
+      <span className="rbc-btn-group">
+        <button
+          onClick={() => onView("month")}
+          className="px-3 py-1 bg-gray-300 rounded-md"
+        >
+          Month
+        </button>
+        <button
+          onClick={() => onView("week")}
+          className="px-3 py-1 bg-gray-300 rounded-md"
+        >
+          Week
+        </button>
+        <button
+          onClick={() => onView("day")}
+          className="px-3 py-1 bg-gray-300 rounded-md"
+        >
+          Day
+        </button>
+        <button
+          onClick={() => onView("agenda")}
+          className="px-3 py-1 bg-gray-300 rounded-md"
+        >
+          Agenda
+        </button>
+      </span>
     </div>
   );
 };

@@ -15,6 +15,14 @@ export const getTeacherDetails = async (id?: string) => {
     throw new Error("Failed to get teacher availability");
   }
 };
+export const getTeacherCalendarSchedule = async (id?: string) => {
+  try {
+    const res = await fetch(`${backendUrl}/teacher/get-teacher-calendar/${id}`);
+  } catch (error) {
+    console.log("error", error);
+    throw new Error("Failed to get teacher availability");
+  }
+};
 export const getMeTeacher = async (id?: string) => {
   try {
     const session = await getServerSession();
