@@ -16,6 +16,10 @@ const NavItems = [
     path: "/about-us",
   },
   {
+    name: "News",
+    path: "/news",
+  },
+  {
     name: "FAQ",
     path: "/faq",
   },

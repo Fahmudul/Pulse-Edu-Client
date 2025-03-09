@@ -9,18 +9,25 @@ import {
   persistReducer,
 } from "redux-persist";
 import authReducer from "./Features/Auth/AuthSlice";
+import newsReducer from "./Features/News/News.slice";
 import storage from "./storage";
 import { baseApi } from "./api/baseApi";
 export const authPersistConfig = {
   key: "auth",
   storage,
 };
+export const newsPersistConfig = {
+  key: "news",
+  storage,
+};
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedNewsReducer = persistReducer(newsPersistConfig, newsReducer);
 export const makeStore = () => {
   return configureStore({
     reducer: {
       auth: persistedAuthReducer,
       [baseApi.reducerPath]: baseApi.reducer,
+      news: persistedNewsReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

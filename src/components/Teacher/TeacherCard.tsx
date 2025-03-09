@@ -1,8 +1,7 @@
 import React from "react";
-import { Button } from "../ui/button";
-import { Users2 } from "lucide-react";
-import { ITeacher, ITutor } from "@/types/global";
+import { ITutor } from "@/types/global";
 import Link from "next/link";
+import Image from "next/image";
 
 const TeacherCard = ({
   className,
@@ -13,20 +12,18 @@ const TeacherCard = ({
   hideButton?: boolean;
   teacher?: ITutor;
 }) => {
-  console.log("teacher", teacher);
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-sm">
-      {/* Background Image - Consider a subtle header image */}
-      <div
-        className="h-[300px] bg-gray-200 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${teacher?.image})`,
-        }}
-      ></div>
+    <div className="bg-[#f5f7fa] max-h-[530px] hover:scale-[1.02] transition-all duration-500 rounded-lg shadow-lg overflow-hidden max-w-sm">
+      <Image
+        src={teacher?.image!}
+        className="h-[300px] object-fill bg-gray-200 "
+        width={450}
+        height={300}
+        alt="Teacher"
+        loading="lazy"
+      />
 
-      {/* Card Content */}
       <div className="p-6">
-        {/* Name, Title and Availability Badge */}
         <div className="flex justify-between items-start mb-2">
           <div>
             <h3 className="text-xl font-semibold">{teacher?.name}</h3>
@@ -43,7 +40,6 @@ const TeacherCard = ({
           </span>
         </div>
 
-        {/* Description */}
         <p className="text-gray-700 mb-4">
           {teacher?.description.slice(0, 100)}...{" "}
           <Link
@@ -54,9 +50,7 @@ const TeacherCard = ({
           </Link>
         </p>
 
-        {/* Stats Row */}
         <div className="flex justify-between items-center mb-4">
-          {/* Rating */}
           <div className="flex items-center">
             <div className="bg-yellow-100 text-yellow-800 p-2 rounded-lg flex items-center mr-4">
               <span className="font-bold mr-1">{teacher?.rating}.0</span>
@@ -70,19 +64,16 @@ const TeacherCard = ({
               </svg>
             </div>
 
-            {/* Students */}
             <div className="text-gray-600 flex items-center">
               <span className="font-semibold mr-1">3123</span> students
             </div>
           </div>
 
-          {/* Hourly Rate */}
           <div className="bg-blue-50 text-blue-700 px-3 py-2 rounded-lg font-bold">
             ${teacher?.hourlyRate}/hr
           </div>
         </div>
 
-        {/* Button */}
         {!hideButton && (
           <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition duration-200">
             Send Message

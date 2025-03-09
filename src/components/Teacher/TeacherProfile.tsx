@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { CirclePlay, DollarSign, Star, Users, X } from "lucide-react";
-import User from "../../../public/assets/User.jpg";
+// import User from "../../../public/assets/User.jpg";
 import { TbWorld } from "react-icons/tb";
 import Link from "next/link";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa6";
@@ -39,9 +39,12 @@ const TeacherProfile = async ({ id }: { id: string }) => {
         <div className="h-[260px] flex justify-between  shadow-lg items-center w-full  p-10 bg-[#F9FAFB] rounded-lg">
           <div className="relative flex gap-4 items-center">
             <Image
-              src={User}
+              src={teacherData?.image}
               alt="user"
               className="w-[120px] h-[120px] rounded-full"
+              loading="lazy"
+              width={120}
+              height={120}
             />
             <div className="flex flex-col gap-4">
               <span className="text-2xl font-bold text-primary">

@@ -88,8 +88,8 @@ const AboutUs = () => {
         </div>
       </div>
       {/* Mission */}
-      <div className="w-full bg-[#ffeee8]">
-        <div className="w-[82.5%] grid grid-cols-2 mx-auto lg:my-16">
+      <div className="w-full bg-[#ffeee8] ">
+        <div className="w-[82.5%] grid grid-cols-2 mx-auto  ">
           <div className="bg-[url('/assets/group.png')] bg-cover bg-center h-[500px]"></div>
           <div className="row-span-2 flex justify-center flex-col">
             <div className="text-[#FF6636] font-medium">
@@ -110,7 +110,7 @@ const AboutUs = () => {
         </div>
       </div>
       {/* Teams */}
-      <div className="w-full bg-[#f5f7fa] py-20">
+      <div className="w-full bg-[#f5f7fa] py-20 ">
         <div className="flex w-[82.5%] mx-auto  items-center gap-28 ">
           <div className="max-w-[425px]">
             <div className="row-span-2 flex justify-center flex-col">

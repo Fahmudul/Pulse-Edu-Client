@@ -9,6 +9,8 @@ import React, { useEffect, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
+import TeacherCardSkeleton from "@/components/Teacher/TeacherCardSkeleton";
 
 const Page = () => {
   const [params, setParams] = useState<{
@@ -336,8 +338,10 @@ const Page = () => {
             </div>
             <div className=" grid grid-cols-3 gap-5">
               {isLoading ? (
-                <div className="col-span-3 flex justify-center items-center min-h-[400px]">
-                  <p>Loading teachers...</p>
+                <div className="flex w-full col-span-3 gap-3 ">
+                  <TeacherCardSkeleton />
+                  <TeacherCardSkeleton />
+                  <TeacherCardSkeleton />
                 </div>
               ) : teacherData?.data?.res?.length > 0 ? (
                 teacherData?.data?.res?.map((teacher: ITutor, idx: number) => (

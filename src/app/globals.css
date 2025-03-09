@@ -455,3 +455,18 @@
 .custom-shadow {
   box-shadow: 0px 0px 32px 0px rgba(9, 26, 68, 0.07);
 }
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.pulse {
+  animation: pulse 1.5s infinite ease-in-out;
+}

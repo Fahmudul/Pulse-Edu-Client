@@ -1,6 +1,6 @@
 "use client";
 import CommonBanner from "@/components/CommonBanner";
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -28,12 +28,64 @@ const faqItems = [
   "Privacy Policy",
   "Contact Support",
 ];
+const faqCategories = ["Tutoring", "Payments", "Account Management"];
+type FaqData = {
+  [key: string]: {
+    id: string;
+    question: string;
+    answer: string;
+  }[];
+};
+const faqData: FaqData = {
+  Tutoring: [
+    {
+      id: "tutoring-1",
+      question: "How do I find a tutor?",
+      answer:
+        "You can browse our tutor directory and filter based on subject, availability, and ratings.",
+    },
+    {
+      id: "tutoring-2",
+      question: "Can I cancel a session?",
+      answer:
+        "Yes, you can cancel a session 24 hours before the scheduled time without a penalty.",
+    },
+    {
+      id: "tutoring-3",
+      question: "What if I’m not satisfied with my tutor?",
+      answer:
+        "We offer a tutor replacement policy if you’re not satisfied with your session.",
+    },
+  ],
+  Payments: [
+    {
+      id: "payments-1",
+      question: "How are payments processed?",
+      answer: "Payments are securely processed through Stripe and PayPal.",
+    },
+    {
+      id: "payments-2",
+      question: "Can I get a refund?",
+      answer:
+        "Refunds are available if you cancel within our refund policy timeframe.",
+    },
+  ],
+  "Account Management": [
+    {
+      id: "account-1",
+      question: "How do I reset my password?",
+      answer:
+        "Go to settings and click on 'Forgot Password' to receive a reset link.",
+    },
+    {
+      id: "account-2",
+      question: "Can I change my email address?",
+      answer: "Yes, you can update your email in the account settings.",
+    },
+  ],
+};
 const Faq = () => {
-  // const form = useForm();
-
-  // const onSubmit: SubmitHandler<FieldValues> = (data) => {
-  //   toast.info("Question Submitted");
-  // };
+  const [selectedCategory, setSelectedCategory] = useState(faqCategories[0]);
   return (
     <div>
       <CommonBanner subTitle="FAQs " title="FAQs " />
@@ -44,41 +96,33 @@ const Faq = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
           <div className="h-[600px] w text-primary flex flex-col p-4 space-y-2">
             <nav className="space-y-2">
-              {faqItems.map((item, index) => (
+              {faqCategories.map((category, index) => (
                 <span
                   key={index}
-                  className={`border block px-4 py-2 rounded-md transition-colors hover:bg-gray-300 ${
-                    index == 0 && "bg-primaryPro"
+                  onClick={() => setSelectedCategory(category)}
+                  className={`border block px-4 py-2 rounded-md transition-colors cursor-pointer hover:bg-gray-300 ${
+                    selectedCategory === category && "bg-primaryPro"
                   }`}
                 >
-                  {item}
+                  {category}
                 </span>
               ))}
             </nav>
           </div>
 
+          {/* FAQ Content */}
           <div className="col-span-2 py-4">
             <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1" className=" py-1 px-6 mb-5 border">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2" className=" py-1 px-6 mb-5 border">
-                <AccordionTrigger>Is it styled?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It comes with default styles that matches the other
-                  components&apos; aesthetic.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3" className=" py-1 px-6 mb-5 border">
-                <AccordionTrigger>Is it animated?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It's animated by default, but you can disable it if you
-                  prefer.
-                </AccordionContent>
-              </AccordionItem>
+              {faqData[selectedCategory].map((faq) => (
+                <AccordionItem
+                  key={faq.id}
+                  value={faq.id}
+                  className="py-1 px-6 mb-5 border"
+                >
+                  <AccordionTrigger>{faq.question}</AccordionTrigger>
+                  <AccordionContent>{faq.answer}</AccordionContent>
+                </AccordionItem>
+              ))}
             </Accordion>
           </div>
           <div className=" bg-[#f5f7fa] mt-4">
@@ -99,8 +143,8 @@ const Faq = () => {
                 id="comments"
                 name="comments"
                 placeholder="Message"
-                rows="4"
-                cols="39"
+                rows={4}
+                cols={39}
                 className="pt-4 pl-4 "
               />
               <button
