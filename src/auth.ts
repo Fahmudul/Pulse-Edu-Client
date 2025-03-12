@@ -90,5 +90,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   secret: process.env.AUTH_SECRET as string,
 });
-console.log("auth secret", process.env.NEXTAUTH_SECRET as string);
+console.log("auth secret", process.env.AUTH_SECRET as string);
 // export default authOptions;
