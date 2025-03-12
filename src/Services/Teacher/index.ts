@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { IAvailability } from "@/types/global";
 import { cookies } from "next/headers";
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
+const backendUrl = process.env.BACKEND_URL as string;
 export const getTeacherDetails = async (id?: string) => {
   try {
     const res = await fetch(`${backendUrl}/teacher/get-teacher-details/${id}`);

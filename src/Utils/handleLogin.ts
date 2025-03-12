@@ -7,7 +7,7 @@ const handleLogin = async (data: {
   password: string;
 }): Promise<{ result: any; decodedData: any } | undefined> => {
   console.log("from handle login", data);
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
+  const backendUrl = process.env.BACKEND_URL as string;
   try {
     const res = await fetch(`${backendUrl}/auth/login`, {
       method: "POST",

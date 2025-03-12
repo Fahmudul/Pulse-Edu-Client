@@ -2,7 +2,7 @@ import { TInputFields } from "@/app/login/page";
 
 export const handleRegister = async (data: TInputFields & { name: string }) => {
   console.log("hitting 2", data);
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
+  const backendUrl = process.env.BACKEND_URL as string;
   try {
     const res = await fetch(`${backendUrl}/auth/register`, {
       method: "POST",

@@ -90,5 +90,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   secret: process.env.AUTH_SECRET as string,
 });
-console.log("auth secret", process.env.AUTH_SECRET as string);
+console.log("Auth ENV:", {
+  GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
+  GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+  BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
+  BACKEND_URL_Server: process.env._BACKEND_URL,
+  AUTH_SECRET: process.env.AUTH_SECRET,
+});
 // export default authOptions;

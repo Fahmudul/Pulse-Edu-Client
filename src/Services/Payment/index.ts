@@ -3,7 +3,7 @@
 import { IPaymentPayload } from "@/types/global";
 import { revalidateTag } from "next/cache";
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
+const backendUrl = process.env.BACKEND_URL as string;
 export const confirmPayment = async (payload: IPaymentPayload) => {
   console.log("booking", payload);
   try {

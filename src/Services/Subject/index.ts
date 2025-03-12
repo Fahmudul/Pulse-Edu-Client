@@ -2,7 +2,7 @@
 
 // import { IAvailability } from "@/types/global";
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
+const backendUrl = process.env.BACKEND_URL as string;
 export const getAllSubject = async () => {
   try {
    

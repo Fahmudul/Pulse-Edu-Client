@@ -5,7 +5,7 @@ import { revalidateTag } from "next/cache";
 
 // import { IAvailability } from "@/types/global";
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
+const backendUrl = process.env.BACKEND_URL as string;
 export const createBookingRequest = async (payload: IBooking) => {
   console.log("booking", payload);
   try {
