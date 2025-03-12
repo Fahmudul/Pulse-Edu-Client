@@ -7,6 +7,7 @@ import StripePaymentCard from "./PaymentCard";
 import { getSingleBooking } from "@/Services/Booking";
 import { useAppSelector } from "@/Redux/hooks";
 import { PaymentProps } from "@/types/global";
+import StudentLoader from "../Student/StudentLoader";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBILSHABLE_KEY as string
@@ -49,7 +50,11 @@ const PaymentDetails = () => {
     setIsProcessing(false);
   };
   if (loading) {
-    return <p>Loading</p>;
+    return (
+      <div className="w-full text-xl font-bold text-primary h-[500px] flex justify-center items-center">
+        <StudentLoader />
+      </div>
+    );
   } else if (!paymentData) {
     return (
       <div className="w-full text-xl font-bold text-primary h-[500px] flex justify-center items-center">

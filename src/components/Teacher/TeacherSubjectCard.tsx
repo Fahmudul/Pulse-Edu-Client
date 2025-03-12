@@ -4,7 +4,7 @@ import React from "react";
 const TeacherSubjectCard = () => {
   return (
     <div
-      className={`w-full max-w-sm bg-[#F9FAFB] rounded-lg shadow-lg overflow-hidden`}
+      className={`w-full max-w-sm border border-gray-300 shadow-md bg-[#F9FAFB] rounded-lg  overflow-hidden`}
     >
       {/* Background Image */}
       <div

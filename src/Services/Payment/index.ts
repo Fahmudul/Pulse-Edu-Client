@@ -25,3 +25,15 @@ export const confirmPayment = async (payload: IPaymentPayload) => {
     throw new Error("Failed to create booking request");
   }
 };
+
+export const getALlPayment = async (id: string) => {
+  try {
+    const res = await fetch(`${backendUrl}/payment/${id}`);
+    const result = await res.json();
+    console.log("payment result ", result);
+    return result;
+  } catch (error) {
+    console.log("error", error);
+    throw new Error("Failed to fetch payment");
+  }
+};

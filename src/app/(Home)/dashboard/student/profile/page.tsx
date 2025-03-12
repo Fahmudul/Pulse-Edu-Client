@@ -24,11 +24,13 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import TeacherCard from "@/components/Teacher/TeacherCard";
-import Loader from "@/components/Loader/Loader";
-import Payment from "@/components/Student/Payment";
 import PaymentComponent from "@/components/Payment/PaymentDetails";
+import { useAppSelector } from "@/Redux/hooks";
+import StudentSettings from "@/components/Student/StudentSettings";
+import StudentPaymentCard from "@/components/Student/StudentPaymentCard";
 const UserProfile = () => {
-  const { user } = useUser();
+  const user = useAppSelector((state) => state.auth);
+  console.log(user);
   return (
     <div className="flex-1   w-full lg:w-auto relative  ">
       {/* Dashboard Content */}
@@ -43,9 +45,9 @@ const UserProfile = () => {
             />
             <div className="flex flex-col gap-4">
               <p className="text-2xl font-bold text-primary">{user?.name}</p>
-              <p className="text-primary font-semibold">
-                Web Designer & Developer
-              </p>
+              <span className="bg-gradient-to-r from-green-600 to-green-300 bg-clip-text text-transparent font-bold text-3xl">
+                Student
+              </span>
             </div>
           </div>
           <div>
@@ -237,18 +239,21 @@ const UserProfile = () => {
               </div>
             </TabsContent>
             <TabsContent value="message">
-              Change your password here.
+              <div className="w-full text-xl font-bold text-primary h-[500px] flex justify-center items-center">
+                <p className="text-4xl font-bold">Coming Soon! Stay tuned</p>
+              </div>
             </TabsContent>
-            <TabsContent value="session payment" >
+            <TabsContent value="session payment">
               <div className="mt-5 w-full bg-white rounded-lg py-6 h-full ">
                 <PaymentComponent />
               </div>
             </TabsContent>
             <TabsContent value="purchase history">
-              Change your password here.
+              <h1 className="text-3xl font-bold mb-5">Purchase History</h1>
+              <StudentPaymentCard />
             </TabsContent>
             <TabsContent value="settings">
-              Change your password here.
+              <StudentSettings />
             </TabsContent>
           </Tabs>
         </div>

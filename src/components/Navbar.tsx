@@ -37,7 +37,7 @@ const Navbar = () => {
             className={`${
               pathname === item.path &&
               "text-primary border-b-2 border-primary px-2"
-            } font-medium hover:text-accent transition-all duration-300 text-primary`}
+            } font-medium  transition-all duration-300 text-primary`}
           >
             {item.name}
           </Link>

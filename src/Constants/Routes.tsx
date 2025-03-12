@@ -7,6 +7,7 @@ import {
   CreditCard,
   Github,
   MessageSquare,
+  MessageSquareCode,
   Newspaper,
   PlusCircle,
   Settings,
@@ -84,13 +85,13 @@ export const teacherMenuItems = [
   },
   {
     icon: <PlusCircle className="w-5 h-5" />,
-    label: "Create New Course",
-    path: "/dashboard/teacher/create-course",
+    label: "Create Subject",
+    path: "/dashboard/teacher/create-subject",
   },
   {
     icon: <Stack width="24" height="24" />,
-    label: "My Courses",
-    path: "/dashboard/teacher/courses",
+    label: "My Subjects",
+    path: "/dashboard/teacher/subjects",
   },
   {
     icon: <CreditCard className="w-5 h-5" />,
@@ -98,7 +99,7 @@ export const teacherMenuItems = [
     path: "/dashboard/teacher/earning",
   },
   {
-    icon: <CreditCard className="w-5 h-5" />,
+    icon: <MessageSquareCode className="w-5 h-5" />,
     label: "Messages",
     path: "/dashboard/teacher/messages",
   },

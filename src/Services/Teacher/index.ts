@@ -1,8 +1,8 @@
 "use server";
 
+import { auth } from "@/auth";
 import { IAvailability } from "@/types/global";
-import { getServerSession } from "next-auth";
-
+import { cookies } from "next/headers";
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
 export const getTeacherDetails = async (id?: string) => {
   try {
@@ -18,7 +18,7 @@ export const getTeacherDetails = async (id?: string) => {
 export const getTeacherCalendarSchedule = async (id?: string) => {
   try {
     const res = await fetch(`${backendUrl}/teacher/get-teacher-calendar/${id}`);
-    return await res.json()
+    return await res.json();
   } catch (error) {
     console.log("error", error);
     throw new Error("Failed to get teacher availability");
@@ -26,7 +26,7 @@ export const getTeacherCalendarSchedule = async (id?: string) => {
 };
 export const getMeTeacher = async (id?: string) => {
   try {
-    const session = await getServerSession();
+    const session = await auth();
     const email = session?.user?.email;
 
     const res = await fetch(
@@ -40,11 +40,10 @@ export const getMeTeacher = async (id?: string) => {
     throw new Error("Failed to get teacher availability");
   }
 };
-
 export const saveAvailability = async (payload: IAvailability) => {
   try {
     console.log("payload", payload);
-    const session = await getServerSession();
+    const session = await auth();
     const email = session?.user?.email;
     // console.log("from line 21", token);
     const modifiedPayload = { availability: payload, email };
@@ -65,7 +64,7 @@ export const saveAvailability = async (payload: IAvailability) => {
 
 export const getTeacherAvailability = async () => {
   try {
-    const session = await getServerSession();
+    const session = await auth();
     const email = session?.user?.email;
     const res = await fetch(
       `${backendUrl}/teacher/get-teacher-availability/${email}`
@@ -99,5 +98,38 @@ export const getAllTeacher = async () => {
   } catch (error) {
     console.log(error);
     throw new Error("Failed to fetch all teacher");
+  }
+};
+
+export const CreateSubject = async (payload: any) => {
+  try {
+    const res = await fetch(`${backendUrl}/teacher/crete-subject`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to create subject");
+  }
+};
+export const UpdateInformation = async (payload: any) => {
+  try {
+    const res = await fetch(`${backendUrl}/teacher/udpate-information`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    const result = await res.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to create subject");
   }
 };

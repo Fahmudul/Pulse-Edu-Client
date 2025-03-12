@@ -4,6 +4,7 @@ import { ArrowLeft, Share, Bookmark, Calendar, User } from "lucide-react";
 import { useAppSelector } from "@/Redux/hooks";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 const NewsDetailsPage = () => {
   const article = useAppSelector((state) => state.news);
@@ -80,11 +81,14 @@ const NewsDetailsPage = () => {
       {/* Featured Image */}
       {article.urlToImage && (
         <div className="mb-8">
-          <img
-            src={article.urlToImage}
-            alt={article.title}
-            className="w-full h-auto rounded-lg shadow-md"
-          />
+          <div className="relative w-full h-64 md:h-80 lg:h-[500px]">
+            <Image
+              fill
+              src={article.urlToImage}
+              alt={article.title as string}
+              className="w-full h-auto rounded-lg shadow-md"
+            />
+          </div>
           <p className="text-sm text-gray-500 mt-2 italic text-center">
             Image credit: {article.source?.name || "News source"}
           </p>

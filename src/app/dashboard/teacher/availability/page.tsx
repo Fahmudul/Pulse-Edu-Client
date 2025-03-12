@@ -3,10 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Calendar, momentLocalizer, View, Views } from "react-big-calendar";
 import moment from "moment";
 import "../../../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
-import {
-  getTeacherCalendarSchedule,
-  getTeacherDetails,
-} from "@/Services/Teacher";
+import { getTeacherCalendarSchedule } from "@/Services/Teacher";
 import { calendarStyles } from "@/components/Teacher/Calendar.style";
 import { useSession } from "next-auth/react";
 import {
@@ -15,7 +12,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TooltipContent } from "@radix-ui/react-tooltip";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -56,6 +52,7 @@ const TeacherAvailabilityPage = () => {
   const [currentView, setCurrentView] = useState<View>(Views.MONTH);
   const [currentDate, setCurrentDate] = useState(new Date());
   const handleViewChange = (newView: View) => {
+    console.log(newView);
     setCurrentView(newView as View);
   };
 
@@ -76,7 +73,7 @@ const TeacherAvailabilityPage = () => {
   const localizer = momentLocalizer(moment);
 
   return (
-    <div className="p-6 bg-[#E8F6F3]/10 rounded-xl">
+    <div className="px-6 bg-[#E8F6F3]/10 rounded-xl">
       <style>{calendarStyles}</style>
       <div className="mb-6 flex justify-between items-center py-4">
         <div>

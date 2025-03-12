@@ -1,3 +1,6 @@
+"use client";
+import { removeUser } from "@/Redux/Features/Auth/AuthSlice";
+import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { handleLogout } from "@/Utils/handleLogout";
 import {
   DropdownMenu,
@@ -11,9 +14,13 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export function DropdownMenuDemo({ role }: { role: string }) {
+  const user = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const redirectUrl =
     role === "admin"
       ? "/dashboard/admin/analytics"
+      : role === "teacher"
+      ? "/dashboard/teacher/profile"
       : "/dashboard/student/profile";
   const router = useRouter();
   return (
@@ -32,6 +39,10 @@ export function DropdownMenuDemo({ role }: { role: string }) {
           className="hover:text-primary hover:bg-[#e8f6f3]"
           onClick={() => {
             handleLogout();
+            if (user) {
+              console.log("Deleted from redux");
+              dispatch(removeUser());
+            }
             router.push("/login");
           }}
         >

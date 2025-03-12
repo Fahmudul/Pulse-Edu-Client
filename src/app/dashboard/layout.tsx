@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Menu, X, LogOut, Home } from "lucide-react";
+import { Menu, X, LogOut, Home, Download } from "lucide-react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import {
@@ -8,8 +8,13 @@ import {
   teacherMenuItems,
   userMenuItems,
 } from "@/Constants/Routes";
-import { useParams, usePathname } from "next/navigation";
-
+import { usePathname } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar } from "@/components/ui/avatar";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import hat from "../../app/hat.svg";
 export default function AdminDashboard({
   children,
 }: {
@@ -20,8 +25,8 @@ export default function AdminDashboard({
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-  const location = usePathname()
-  console.log("location", location)
+  const location = usePathname();
+  console.log("location", location);
   const menuItems: { icon: React.ReactNode; label: string; path: string }[] =
     teacherMenuItems;
   const { data: session } = useSession();
@@ -35,7 +40,7 @@ export default function AdminDashboard({
   return (
     <div
       style={{ backgroundColor: "#E8F6F3", position: "relative" }}
-      className="flex h-screen text-[#093B3B] relative"
+      className="flex  text-[#093B3B] relative"
     >
       {/* Mobile Menu Button */}
       <button
@@ -59,19 +64,26 @@ export default function AdminDashboard({
 
       {/* Sidebar */}
       <div
-        style={{ backgroundColor: "#136E61" }}
-        className={`fixed z-40 top-0 left-0 lg:static w-64 h-full transform transition-transform duration-300 ease-in-out ${
+        style={{ backgroundColor: "#234e52", position: "sticky" }}
+        className={` z-40 top-0 left-0 bottom-0 w-64 h-full transform transition-transform duration-300 ease-in-out ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
-        <div className="p-4 flex flex-col justify-between h-full">
+        <div className="p-4 flex flex-col justify-between h-screen ">
           <div>
-            <div className="mb-8 pt-4 lg:pt-0">
+            <div className="mb-8 pt-4 lg:pt-0 flex items-center gap-3">
+              <Image
+                src={hat}
+                alt="logo"
+                width={40}
+                height={40}
+                className=" -rotate-12 "
+              />
               <h2
                 style={{ color: "#E8F6F3" }}
-                className="text-xl font-bold mb-4 pb-2 text-center"
+                className="text-xl font-bold  text-center "
               >
-                Dashboard
+                Pulse Edu
               </h2>
             </div>
             <nav>
@@ -81,7 +93,9 @@ export default function AdminDashboard({
                     <Link
                       href={item.path}
                       style={{ color: "#E8F6F3" }}
-                      className="flex items-center space-x-3 p-2 rounded hover:opacity-80 transition-colors"
+                      className={`${
+                        location === item.path ? "bg-[#36a292]" : ""
+                      } flex items-center space-x-3 px-3 py-2 rounded hover:opacity-80 transition-colors`}
                       onClick={() => setIsSidebarOpen(false)}
                     >
                       {item.icon}
@@ -109,22 +123,48 @@ export default function AdminDashboard({
         </div>
       </div>
       <div className="w-full">
-        <div style={{ backgroundColor: "#fff" }} className="p-4 shadow">
-          <div className="flex justify-end lg:justify-between items-center">
-            <h1
-              style={{ color: "#093B3B" }}
-              className="text-xl font-bold hidden lg:block"
-            >
-              Welcome Back, {session?.user?.name}
-            </h1>
-            <button
-              style={{ backgroundColor: "#136E61", color: "#E8F6F3" }}
-              className={`${location === "/dashboard/teacher/availability" && "hidden"} px-4 py-2 rounded font-medium hover:opacity-90 transition-opacity ml-12 lg:ml-0`}
-            >
-              Profile
-            </button>
-          </div>
-        </div>
+        {/* Profile Banner */}
+        <Card className="bg-[#234e52] text-white ">
+          <CardContent className="p-4">
+            <div className="flex flex-col md:flex-row items-center justify-between">
+              <div className="flex items-center mb-4 md:mb-0">
+                <Avatar className="h-16 w-16 mr-4">
+                  <Image
+                    src={session?.user?.image!}
+                    alt="Profile"
+                    width={100}
+                    height={100}
+                  />
+                </Avatar>
+                <div>
+                  <h2 className="text-xl font-bold">{session?.user?.name}</h2>
+                  <p className="text-gray-400 text-sm">
+                    {session?.user?.email}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <div className="mr-4">
+                  <p className="text-xs text-gray-400 mb-1">1/4 Steps</p>
+                  <Progress value={25} className="h-1.5 w-52 bg-primaryPro" />
+                  <p className="text-xs text-gray-400 mt-1">25% Completed</p>
+                </div>
+
+                <Button variant="outline" className=" border">
+                  Edit Biography
+                </Button>
+
+                <Button
+                  variant="outline"
+                  className="border-gray-700 text-white hover:bg-gray-800"
+                >
+                  <Download className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
         {children}
       </div>
     </div>

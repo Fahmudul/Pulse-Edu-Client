@@ -6,19 +6,24 @@ import type { NextRequest } from "next/server";
 import { getUser } from "./Utils/getUser";
 
 // This function can be marked `async` if using `await` inside
+// export { auth as middleware } from "@/auth"
 export async function middleware(request: NextRequest) {
   // Current route
   const route = request.nextUrl.pathname;
   let user;
   const token = await getToken({
     req: request,
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.AUTH_SECRET,
   });
   if (token) {
     user = token;
+    console.log(" token got from token");
   } else {
     user = await getUser();
+    console.log("token getUser", token);
+    console.log(" token got from get user");
   }
+  console.log(user, "from middleware");
   const isPublicRoute = route === "/login" || route === "/register";
   if (!user && !isPublicRoute) {
     console.log("hitting 1");
@@ -31,7 +36,8 @@ export async function middleware(request: NextRequest) {
         ? "/dashboard/admin/analytics"
         : user?.role === "teacher"
         ? "/dashboard/teacher/profile"
-        : `/dashboard/${user?.role}/student`;
+        : `/dashboard/student/profile`;
+    console.log("hitting 2");
 
     return NextResponse.redirect(new URL(redirectRoute, request.url));
   }
@@ -54,5 +60,5 @@ export async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/login", "/register", "/dashboard/:path*"],
+  matcher: ["/login", "/register", "/dashboard/:path*", "/teacher/:title"],
 };

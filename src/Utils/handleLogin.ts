@@ -1,7 +1,11 @@
 "use server";
 import { jwtDecode } from "jwt-decode";
+import { signIn } from "next-auth/react";
 import { cookies } from "next/headers";
-const handleLogin = async (data: { email: string; password: string }) => {
+const handleLogin = async (data: {
+  email: string;
+  password: string;
+}): Promise<{ result: any; decodedData: any } | undefined> => {
   console.log("from handle login", data);
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL as string;
   try {
@@ -20,10 +24,6 @@ const handleLogin = async (data: { email: string; password: string }) => {
     console.log("from line 29", result);
     const accessToken = cookieStore.get("accessToken")?.value;
     const decodedData = jwtDecode(accessToken as string);
-    // const decoded
-    // const redirectPath = user?.role === "admin"
-    // ? "/dashboard/admin/analytics"
-    // : `/dashboard/${user?.role}/add-blog`;
     return { result, decodedData };
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -33,3 +33,6 @@ const handleLogin = async (data: { email: string; password: string }) => {
   }
 };
 export default handleLogin;
+export const googleLogin = async () => {
+  signIn("google");
+};

@@ -2,19 +2,28 @@
 import Link from "next/link";
 import Navbar from "../Navbar";
 import { Button } from "../ui/button";
-
-// import Image from "next/image";
-import "animate.css";
-// import { useSession } from "next-auth/react";
 import { DropdownMenuDemo } from "../ui/DropDown";
 import MobileStatusBar from "../MobileStatusBar";
 import { Input } from "../ui/input";
 import hat from "../../../public/assets/Adobe Express - file.png";
 import Image from "next/image";
 import { useUser } from "@/Context/UserContext";
+import { useAppSelector } from "@/Redux/hooks";
+import { useSession } from "next-auth/react";
+import { IStudent } from "@/types/global";
+import { User } from "next-auth";
 const Header = () => {
-  // const { data: session } = useSession();
-  const { user } = useUser();
+  let user;
+  const userFromRedux = useAppSelector((state) => state.auth);
+  const sessionUser = useSession();
+  console.log(sessionUser);
+  if (sessionUser?.status === "authenticated") {
+    console.log("hitting from session user");
+    user = sessionUser?.data?.user as User;
+  } else if (userFromRedux.email) {
+    console.log("hitting from redux ");
+    user = userFromRedux as IStudent;
+  }
   console.log("from session", user);
   return (
     <header className=" text-white  min-h-[70px] pt-3  bg-none 0">
@@ -31,13 +40,13 @@ const Header = () => {
         </Link>
         <Input
           placeholder="Search by tutor, course "
-          className="bg-white text-primary w-[50%] mx-10"
+          className="bg-white text-primary w-[45%] mx-10"
         />
         <div className="hidden xl:flex items-center gap-7 ">
           <Navbar />
           {user ? (
             <>
-              <DropdownMenuDemo role={user?.role} />
+              <DropdownMenuDemo role={user?.role!} />
             </>
           ) : (
             <>

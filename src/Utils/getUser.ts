@@ -13,6 +13,7 @@ export interface IDecodedData {
 }
 export const getUser = async () => {
   const token = (await cookies()).get("accessToken")?.value;
+  console.log("token retriever ", token);
   if (!token) return null;
   return jwtDecode(token!) as IDecodedData;
 };

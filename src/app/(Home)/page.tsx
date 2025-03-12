@@ -6,6 +6,7 @@ import { SiFiverr, SiUdemy, SiUpwork } from "react-icons/si";
 import Title from "@/components/Shared/Title";
 import CourseCard from "@/components/Subjects/SubjectCard";
 import Testimonials from "@/components/Home/Testimonials";
+import CallToAction from "@/components/Home/CallToAction";
 export default function Home() {
   return (
     <main>
@@ -48,6 +49,7 @@ export default function Home() {
             ))}
         </div>
       </PrimaryContainer>
+      <CallToAction/>
       <Testimonials />
     </main>
   );

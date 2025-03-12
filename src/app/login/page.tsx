@@ -6,9 +6,8 @@ import { signIn } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import Link from "next/link";
-import handleLogin from "@/Utils/handleLogin";
-import { useUser } from "@/Context/UserContext";
-import { useRouter } from "next/navigation";
+import handleLogin, { googleLogin } from "@/Utils/handleLogin";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/Redux/hooks";
 import { setUser } from "@/Redux/Features/Auth/AuthSlice";
 export type TInputFields = {
@@ -24,32 +23,30 @@ const LoginPage = () => {
     handleSubmit,
     // formState: { errors },
   } = useForm<TInputFields>();
-  // const { user, setIsLoading, setUser } = useUser();
-  // console.log(isLoading);
+  const searchParams = useSearchParams().get("redirect");
+  console.log(searchParams);
   const onSubmit: SubmitHandler<TInputFields> = async (data) => {
     // console.log(data);
     // setIsLoading(true);
+
     const toastId = toast.loading("Logging in...");
     try {
-      const { result, decodedData } = await handleLogin(data);
-      console.log("from login", result);
-      if (result?.success) {
-        toast.success(result?.message, { id: toastId });
-        // setUser(decodedData);
-        dispatch(setUser(decodedData));
-        if (decodedData) {
-          console.log(`Redirecting to: /dashboard/${decodedData.role}/profile`);
-          router.push(`/dashboard/${decodedData.role}/profile`);
+      const res = await handleLogin(data);
+
+      if (res?.result?.success) {
+        toast.success(res?.result?.message, { id: toastId });
+        if (res?.decodedData) {
+          dispatch(setUser(res?.decodedData));
+          const redirectRoute =
+            searchParams || `/dashboard/${res?.decodedData?.role}/profile`;
+          router.push(redirectRoute);
         } else {
           router.push("/");
         }
-        // setIsLoading(false);
       }
     } catch (error) {
       toast.error(error as string);
       console.log(error);
-    } finally {
-      // setIsLoading(false);
     }
   };
   const socialLogins = [

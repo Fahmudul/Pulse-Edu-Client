@@ -78,7 +78,7 @@ export interface IBookingData {
 // Booking session
 export interface IBookingData {
   student?: string;
-  teacher?: string;
+  teacher?: string | string[] | undefined;
   schedule?: ISchedule;
   subject?: string;
   duration?: number;
@@ -217,4 +217,14 @@ export interface ITutor {
   description: string;
   rating: number;
   available: boolean;
+}
+
+
+export interface ISubject {
+  title: any;
+  name: string;
+  category: string;
+  description: string;
+  tutor: string;
+  image?: string;
 }

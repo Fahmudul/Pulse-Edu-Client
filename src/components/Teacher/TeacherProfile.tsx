@@ -11,11 +11,10 @@ import { TabsContent } from "@radix-ui/react-tabs";
 import TeacherSubjectCard from "./TeacherSubjectCard";
 import OverView from "./OverView";
 import {
-  getMeTeacher,
+  
   getSingleTeacherDetails,
   getTeacherDetails,
 } from "@/Services/Teacher";
-import { ButtonLink } from "../ui/link";
 import {
   Dialog,
   DialogClose,
