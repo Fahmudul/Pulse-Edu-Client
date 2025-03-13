@@ -13,8 +13,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorization: {
         params: {
           scope:
-            // "https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.events.readonly openid email profile",
-            "openid email profile",
+            "https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.events.readonly openid email profile",
+            // "openid email profile",
         },
       },
     }),
