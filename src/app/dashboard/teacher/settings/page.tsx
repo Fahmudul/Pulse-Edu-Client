@@ -99,10 +99,15 @@ const Settings = () => {
     <div className="p-10 bg-white shadow-lg rounded-md m-5">
       {/* Profile Picture Upload */}
       <div className="flex items-start gap-5 border-b border-gray-500 pb-7">
-        <div className="w-[20%] p-8 border border-gray-500">
+        <div className="w-[20%]   p-8 border border-gray-500">
           {/* Image container */}
           <Label className="relative" htmlFor="picture">
-            <Image src={user} alt="upload image" />
+            <Image
+              src={imageUrl || user}
+              alt="upload image"
+              width={200}
+              height={200}
+            />
             <p className="text-center absolute bottom-0 p-3 bg-black opacity-40 text-white w-full text-lg font-semibold">
               Upload Photo
             </p>
