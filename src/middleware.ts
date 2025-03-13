@@ -6,7 +6,6 @@ import type { NextRequest } from "next/server";
 import { getUser } from "./Utils/getUser";
 
 // This function can be marked `async` if using `await` inside
-// export { auth as middleware } from "@/auth"
 export async function middleware(request: NextRequest) {
   // Current route
   const route = request.nextUrl.pathname;
