@@ -34,8 +34,9 @@ const TeacherProfile = async ({
 }) => {
   console.log("sttudent logged i", isLoggedIn);
   const { data } = await getTeacherDetails(id);
-  // const user = await auth();
-  const user = await getUser();
+  const teacher = await auth();
+  const student = await getUser();
+  const role = teacher ? teacher?.user?.role : student?.role;
   // console.log("logged in user 2", user);
   const { data: teacherData } = await getSingleTeacherDetails(id);
   // console.log("from service", teacherData);
@@ -109,9 +110,13 @@ const TeacherProfile = async ({
               </div>
               <Dialog>
                 <DialogTrigger
-                  disabled={!teacherData?.canAccess || !isLoggedIn}
+                  disabled={
+                    (!teacherData?.canAccess || !isLoggedIn) &&
+                    role == "teacher"
+                  }
                   className={` ${
-                    !teacherData?.canAccess || !isLoggedIn
+                    (!teacherData?.canAccess || !isLoggedIn) &&
+                    role == "teacher"
                       ? "cursor-not-allowed"
                       : "cursor-pointer"
                   } bg-primary py-2 focus:scale-95 transition-all duration-300 px-3 rounded-lg text-primaryPro`}
