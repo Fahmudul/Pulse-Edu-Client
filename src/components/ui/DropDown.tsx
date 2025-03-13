@@ -47,7 +47,7 @@ export function DropdownMenuDemo({ role }: { role: string }) {
                 // router.push("/login");
                 console.log("redux user");
                 handleLogout();
-                return router.push("/login")
+                router.push("/login")
               } else if (role === "teacher") {
                 // router.push("/login");
                 console.log("session user signout");
