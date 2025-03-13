@@ -25,7 +25,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async signIn({ user, account }) {
       try {
-        console.log("account details", account);
+        // console.log("account details", account);
         const OuthData = {
           email: user?.email,
           name: user?.name,
@@ -43,10 +43,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             body: JSON.stringify(OuthData),
           }
         );
-        console.log(
-          "Auth Fetching:",
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/find-user`
-        );
+        // console.log(
+        //   "Auth Fetching:",
+        //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/find-user`
+        // );
         if (!res.ok) {
           console.error("Backend response error:", await res.text());
           // Still return true to allow sign-in even if the backend call fails
@@ -54,7 +54,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         const response = await res.json();
-        console.log("response from 54", response);
+        // console.log("response from 54", response);
         if (res.ok && account?.provider === "google") {
           user.id = response?.data?._id;
           user.image = response?.data?.image;
@@ -62,13 +62,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
         return true;
       } catch (error) {
-        console.error("Sign-in callback error:", error);
+        // console.error("Sign-in callback error:", error);
         return true;
       }
     },
     async jwt({ user, token, account }) {
       if (user) {
-        console.log("google user 61", user);
+        // console.log("google user 61", user);
         token.name = user.name;
         token.id = user.id!;
         token.email = user.email;
@@ -95,11 +95,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   secret: process.env.AUTH_SECRET as string,
 });
-console.log("Auth ENV:", {
-  GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
-  GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
-  BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
-  BACKEND_URL_Server: process.env.BACKEND_URL,
-  AUTH_SECRET: process.env.AUTH_SECRET,
-});
+// console.log("Auth ENV:", {
+//   GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
+//   GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+//   BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
+//   BACKEND_URL_Server: process.env.BACKEND_URL,
+//   AUTH_SECRET: process.env.AUTH_SECRET,
+// });
 // export default authOptions;
