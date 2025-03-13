@@ -10,11 +10,7 @@ import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import TeacherSubjectCard from "./TeacherSubjectCard";
 import OverView from "./OverView";
-import {
-  
-  getSingleTeacherDetails,
-  getTeacherDetails,
-} from "@/Services/Teacher";
+import { getSingleTeacherDetails, getTeacherDetails } from "@/Services/Teacher";
 import {
   Dialog,
   DialogClose,
@@ -27,10 +23,22 @@ import {
 import { Button } from "../ui/button";
 import BookingModal from "@/components/Booking/BookingModal";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-const TeacherProfile = async ({ id }: { id: string }) => {
+import { auth } from "@/auth";
+import { getUser } from "@/Utils/getUser";
+const TeacherProfile = async ({
+  id,
+  isLoggedIn,
+}: {
+  id: string;
+  isLoggedIn?: boolean;
+}) => {
+  console.log("sttudent logged i", isLoggedIn);
   const { data } = await getTeacherDetails(id);
+  // const user = await auth();
+  const user = await getUser();
+  // console.log("logged in user 2", user);
   const { data: teacherData } = await getSingleTeacherDetails(id);
-  console.log("from service", teacherData);
+  // console.log("from service", teacherData);
   const { name } = teacherData;
   return (
     <div>
@@ -101,9 +109,9 @@ const TeacherProfile = async ({ id }: { id: string }) => {
               </div>
               <Dialog>
                 <DialogTrigger
-                  disabled={!teacherData?.canAccess}
-                  className={`${
-                    !teacherData?.canAccess
+                  disabled={!teacherData?.canAccess || !isLoggedIn}
+                  className={` ${
+                    !teacherData?.canAccess || !isLoggedIn
                       ? "cursor-not-allowed"
                       : "cursor-pointer"
                   } bg-primary py-2 focus:scale-95 transition-all duration-300 px-3 rounded-lg text-primaryPro`}
@@ -129,9 +137,9 @@ const TeacherProfile = async ({ id }: { id: string }) => {
             <div>
               <span className="text-sm text-primary">
                 <p className="font-bold text-lg inline">
-                  {teacherData?.description.slice(0, 6)}
+                  {teacherData?.description?.slice(0, 6)}
                 </p>
-                {teacherData?.description.slice(6)}
+                {teacherData?.description?.slice(6)}
               </span>
             </div>
           </div>

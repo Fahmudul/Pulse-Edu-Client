@@ -81,7 +81,7 @@ export const getSingleTeacherDetails = async (id: string) => {
   try {
     const res = await fetch(`${backendUrl}/teacher/${id}`);
     const result = await res.json();
-    // console.log("land le", result);
+    console.log("land le", result);
     return result;
   } catch (error) {
     console.log("error", error);

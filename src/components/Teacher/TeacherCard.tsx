@@ -41,7 +41,7 @@ const TeacherCard = ({
         </div>
 
         <p className="text-gray-700 mb-4">
-          {teacher?.description.slice(0, 100)}...{" "}
+          {teacher?.description?.slice(0, 100)}...{" "}
           <Link
             href={`/teacher/${teacher?._id}`}
             className="text-blue-600 hover:underline text-sm font-medium"
