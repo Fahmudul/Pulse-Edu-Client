@@ -64,8 +64,10 @@ export default function AddTeacherAvailabilityModal({
     console.log(schedule);
     setIsLoading(true);
     try {
-      await saveAvailability(schedule);
-      setMessage("Availability saved successfully");
+      const result = await saveAvailability(schedule);
+      if (result?.success) {
+        setMessage("Availability saved successfully");
+      }
     } catch (error) {
       setMessage("Error saving availability");
     } finally {
