@@ -40,14 +40,14 @@ export function DropdownMenuDemo({ role }: { role: string }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem className="hover:text-primary hover:bg-[#e8f6f3]">
           <button
-            onClick={() => {
+            onClick={async () => {
               console.log("role is", role);
               if (role === "student") {
                 dispatch(removeUser());
                 // router.push("/login");
                 console.log("redux user");
-                handleLogout();
-                router.push("/login")
+                await handleLogout();
+                router.push("/login");
               } else if (role === "teacher") {
                 // router.push("/login");
                 console.log("session user signout");
