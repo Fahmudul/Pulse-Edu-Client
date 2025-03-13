@@ -4,25 +4,25 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getUser } from "./Utils/getUser";
-
+import { auth } from "@/auth";
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   // Current route
   const route = request.nextUrl.pathname;
   let user;
-  const token = await getToken({
-    req: request,
-    secret: process.env.AUTH_SECRET,
-  });
-  if (token) {
-    user = token;
+  let userFromSession;
+  const session = await auth();
+  userFromSession = session?.user;
+  if (userFromSession) {
+    user = userFromSession;
     console.log(" token got from token");
   } else {
     user = await getUser();
-    console.log("token getUser", token);
+    console.log("token getUser", user);
     console.log(" token got from get user");
   }
   console.log(user, "from middleware");
+  console.log(userFromSession, "from session");
   const isPublicRoute = route === "/login" || route === "/register";
   if (!user && !isPublicRoute) {
     console.log("hitting 1");
