@@ -55,7 +55,7 @@ export const saveAvailability = async (payload: IAvailability) => {
       body: JSON.stringify(modifiedPayload),
     });
     const result = await res.json();
-    // console.log(result);
+    console.log(result);
     return result;
   } catch (error) {
     throw new Error("Failed to save teacher availability");
