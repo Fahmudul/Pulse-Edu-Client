@@ -1,9 +1,12 @@
+"use server"
 import { TInputFields } from "@/app/login/page";
+
+const backendUrl = process.env.BACKEND_URL as string;
 
 export const handleRegister = async (data: TInputFields & { name: string }) => {
   console.log("hitting 2", data);
-  const backendUrl = process.env.BACKEND_URL as string;
   try {
+    console.log("sending data", `${backendUrl}/auth/register`);
     const res = await fetch(`${backendUrl}/auth/register`, {
       method: "POST",
       headers: {

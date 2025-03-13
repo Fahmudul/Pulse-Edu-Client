@@ -32,7 +32,7 @@ const LoginPage = () => {
     const toastId = toast.loading("Logging in...");
     try {
       const res = await handleLogin(data);
-
+      console.log("from llogin", res?.result?.message);
       if (res?.result?.success) {
         toast.success(res?.result?.message, { id: toastId });
         if (res?.decodedData) {
@@ -43,6 +43,8 @@ const LoginPage = () => {
         } else {
           router.push("/");
         }
+      } else {
+        toast.error(res?.result?.message, { id: toastId });
       }
     } catch (error) {
       toast.error(error as string);

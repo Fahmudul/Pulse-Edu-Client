@@ -25,7 +25,7 @@ const RegisterPage = () => {
   } = useForm<TRegistrationInputFields>();
   const onSubmit: SubmitHandler<TRegistrationInputFields> = async (data) => {
     const toastId = toast.loading("Creating an account...");
-    // console.log(data);
+    console.log(data);
     const result = await handleRegister(data);
     if (result?.success) {
       toast.success("User created successfully!", { id: toastId });
