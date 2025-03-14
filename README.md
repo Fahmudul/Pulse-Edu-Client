@@ -11,6 +11,12 @@ Pulse Edu is a **tutor-student** marketplace where students can find and connect
 
 ---
 
+## ERD
+
+![image](https://github.com/user-attachments/assets/6f219465-7767-48f2-8958-b4df8640e6dc)
+
+
+---
 ## 🔥 Core Features
 ### **Public Routes**
 #### 🏠 Home Page
