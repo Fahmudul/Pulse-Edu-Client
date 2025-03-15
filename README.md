@@ -127,8 +127,8 @@ Pulse Edu is a **tutor-student** marketplace where students can find and connect
 
 ## 🔐 Test User Account (Google Login Required For Teacher Only)
 📌 **Since the app is not yet published by Google, use the following test account:**
-- **Email:** r30563080@gmail.com
-- **Password:** $#@&siaM90(+) 06
+- **Email:** 
+- **Password:** 
 
 ---
 
